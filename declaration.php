@@ -100,7 +100,14 @@ function declaration_push_update( $transient ) {
 	}
 
 	if( $remote ) {
-        $remote = json_decode( $remote['body'] );
+      $status = false;
+      if(!is_wp_error($remote)){
+        $response = json_decode( $remote['body'] );
+        if(isset($response->status)){
+          $status = $response->status;
+        }
+      }
+       return $status;
 		// your installed plugin version should be on the line below! You can obtain it dynamically of course
 		if( $remote && version_compare(DECLARATION_VERSION, $remote->version, '<') ) {
 			$res = new stdClass();
