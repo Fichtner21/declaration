@@ -1,0 +1,13 @@
+.declaration-meta-form__label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.declaration-meta-form__row {
+  margin-bottom: 20px;
+}
+
+.declaration-meta-form__input,
+.declaration-meta-form__textarea {
+  width: 100%;
+}
