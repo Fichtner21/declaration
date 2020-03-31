@@ -325,10 +325,10 @@ function display_custom_meta_boxes() { ?>
     </div>
 <?php } }
 
-// Declaration admin styles
+// Declaration styles
 if(! function_exists('declaration_styles')) {
 	function declaration_styles() {
-		$styles_path = plugins_url('declaration') . '/assets/css/style.css';
+		$styles_path = plugins_url(basename(dirname(__FILE__))) . '/assets/css/style.css';
 
 		wp_enqueue_style('declaration', $styles_path);
 	}
@@ -336,7 +336,6 @@ if(! function_exists('declaration_styles')) {
 	add_action('wp_head', 'declaration_styles');
 	add_action('admin_enqueue_scripts', 'declaration_styles');
 }
-// Declaration front styles
 
 // Save custom meta data when post publish
 if(! function_exists('save_details')) {
