@@ -325,7 +325,7 @@ function display_custom_meta_boxes() { ?>
     </div>
 <?php } }
 
-// Declaration
+// Declaration admin styles
 if(! function_exists('declaration_styles')) {
 	function declaration_styles() {
 		$styles_path = plugins_url('declaration') . '/assets/css/style.css';
@@ -336,6 +336,7 @@ if(! function_exists('declaration_styles')) {
 	add_action('wp_head', 'declaration_styles');
 	add_action('admin_enqueue_scripts', 'declaration_styles');
 }
+// Declaration front styles
 
 // Save custom meta data when post publish
 if(! function_exists('save_details')) {

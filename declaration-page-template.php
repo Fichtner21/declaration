@@ -1,7 +1,5 @@
 <?php 
 
-session_start();
-
 /**
 * Template Name: Declaration
 */
@@ -31,7 +29,7 @@ get_header();
 ?>
 
 <main id="site-content" role="main" style="padding: 30px 0;">
-    <div class="container">
+    <div class="custom-container">
         <?php
         $args_old = array(
             'offset'           => 0,    
