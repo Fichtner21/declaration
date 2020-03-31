@@ -4,14 +4,14 @@
 * Description: Wtyczka tworzy stronę z deklaracją dostępności.
 * Author: Przemysław Drożniak & Ernest Fichtner
 * Text Domain: declaration
-* Version: 1.1
+* Version: 1.2
 */
 
 if(defined('WP_DEBUG') && WP_DEBUG) {
     require_once __DIR__ . DIRECTORY_SEPARATOR . 'debugger.php';
 }
 
-define( 'DECLARATION_VERSION', '1.1' );
+define( 'DECLARATION_VERSION', '1.2' );
 
 add_filter('plugins_api', 'declaration_plugin_info', 20, 3);
 /*
