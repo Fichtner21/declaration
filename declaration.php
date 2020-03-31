@@ -117,13 +117,23 @@ function declaration_push_update( $transient ) {
     return $transient;
 }
 
-add_action( 'upgrader_process_complete', 'declaration_after_update', 10, 2 );
 
-function declaration_after_update( $upgrader_object, $options ) {
-	if ( $options['action'] == 'update' && $options['type'] == 'plugin' )  {
-        // just clean the cache when new plugin version is installed
-        delete_transient( 'declaration_upgrade_declaration' );
-	}
+// Upgrade and activate plugin
+if(!function_exists('activate_plugin_after_update')) {
+    function activate_plugin_after_update() {
+        activate_plugin(__FILE__);
+    }
+}
+
+if(!function_exists('declaration_after_update')) {
+    function declaration_after_update( $upgrader_object, $options ) {
+        if ( $options['action'] == 'update' && $options['type'] == 'plugin' )  {
+            // just clean the cache when new plugin version is installed
+            delete_transient( 'declaration_upgrade_declaration' );
+        }
+    }
+    add_action( 'upgrader_process_complete', 'declaration_after_update', 10, 2 );
+    add_action( 'upgrader_process_complete', 'activate_plugin_after_update', 10, 2 );
 }
 
 // Create theme templates
@@ -189,6 +199,7 @@ if(!function_exists('hide_editor')) {
         $template_file = get_post_meta($post_id, '_wp_page_template', true);
 
         if($template_file == 'declaration.php'){ // edit the template name
+            remove_post_type_support('page', 'thumbnail');
             remove_post_type_support('page', 'editor');
             remove_post_type_support('page', 'excerpt');
             remove_post_type_support('page', 'author');
