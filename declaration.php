@@ -2,7 +2,7 @@
 /**
 * Plugin Name: Declaration
 * Description: Wtyczka tworzy stronę z deklaracją dostępności.
-* Author: Przemysław Drożniak & Ernest Fichtner
+* Author: @Przemysław Drożniak & Ernest Fichtner
 * Text Domain: declaration
 * Version: 1.4
 */
