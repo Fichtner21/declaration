@@ -2,16 +2,16 @@
 /**
 * Plugin Name: Declaration
 * Description: Wtyczka tworzy stronę z deklaracją dostępności.
-* Author: @Przemysław Drożniak & Ernest Fichtner
+* Author: Przemysław Drożniak & Ernest Fichtner
 * Text Domain: declaration
-* Version: 1.3
+* Version: 1.4
 */
 
 if(defined('WP_DEBUG') && WP_DEBUG) {
     require_once __DIR__ . DIRECTORY_SEPARATOR . 'debugger.php';
 }
 
-define( 'DECLARATION_VERSION', '1.3' );
+define( 'DECLARATION_VERSION', '1.4' );
 
 add_filter('plugins_api', 'declaration_plugin_info', 20, 3);
 /*
@@ -19,97 +19,104 @@ add_filter('plugins_api', 'declaration_plugin_info', 20, 3);
  * $action 'plugin_information'
 */
 function declaration_plugin_info( $res, $action, $args ) {
-	// do nothing if this is not about getting plugin information
-	if( 'plugin_information' !== $action ) {
-		return false;
-	}
+    // do nothing if this is not about getting plugin information
+    if( 'plugin_information' !== $action ) {
+        return false;
+    }
 
-	$plugin_slug = 'declaration'; // we are going to use it in many places in this function
+    $plugin_slug = 'declaration'; // we are going to use it in many places in this function
 
-	// do nothing if it is not our plugin
-	if( $plugin_slug !== $args->slug ) {
-		return false;
-	}
+    // do nothing if it is not our plugin
+    if( $plugin_slug !== $args->slug ) {
+        return false;
+    }
 
-	// trying to get from cache first
-	if( false == $remote = get_transient( 'declaration_update_' . $plugin_slug ) ) {
-		// info.json is the file with the actual plugin information on your server
-		$remote = wp_remote_get( 'http://wptest.nowoczesnyurzad.pl/info.json', array(
-			'timeout' => 10,
-			'headers' => array(
-				'Accept' => 'application/json'
-			) )
-		);
+    // trying to get from cache first
+    if( false == $remote = get_transient( 'declaration_update_' . $plugin_slug ) ) {
+        // info.json is the file with the actual plugin information on your server
+        $remote = wp_remote_get( 'http://wptest.nowoczesnyurzad.pl/info.json', array(
+            'timeout' => 10,
+            'headers' => array(
+                'Accept' => 'application/json'
+            ) )
+        );
 
-		if ( ! is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 && ! empty( $remote['body'] ) ) {
-			set_transient( 'declaration_update_' . $plugin_slug, $remote, 43200 ); // 12 hours cache
-		}
-	}
+        if ( ! is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 && ! empty( $remote['body'] ) ) {
+            set_transient( 'declaration_update_' . $plugin_slug, $remote, 60 ); // 12 hours cache
+        }
+    }
 
-	if( ! is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 && ! empty( $remote['body'] ) ) {
+    if( ! is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 && ! empty( $remote['body'] ) ) {
         $remote = json_decode( $remote['body'] );
 
         $res = new stdClass();
 
         $res->name = 'Declaration';
-		$res->slug = $plugin_slug;
-		$res->version = $remote->version;
-		$res->tested = $remote->tested;
-		$res->requires = $remote->requires;
-		$res->author = 'Przemysław Drożniak & Ernest Fichtner';
-		$res->download_link = $remote->download_url;
-		$res->trunk = $remote->download_url;
-		$res->requires_php = $remote->requires_php;
-		$res->last_updated = $remote->last_updated;
-		$res->sections = array(
-			'description' => $remote->sections->description,
-			'installation' => $remote->sections->installation
+        $res->slug = $plugin_slug;
+        $res->version = $remote->version;
+        $res->tested = $remote->tested;
+        $res->requires = $remote->requires;
+        $res->author = 'Przemysław Drożniak & Ernest Fichtner';
+        $res->download_link = $remote->download_url;
+        $res->trunk = $remote->download_url;
+        $res->requires_php = $remote->requires_php;
+        $res->last_updated = $remote->last_updated;
+        $res->sections = array(
+            'description' => $remote->sections->description,
+            'installation' => $remote->sections->installation
         );
 
         $res->banners = array(
-			'low' => 'https://source.unsplash.com/random/772x250',
-			'high' => 'https://source.unsplash.com/random/1544x500'
+            'low' => 'https://source.unsplash.com/random/772x250',
+            'high' => 'https://source.unsplash.com/random/1544x500'
         );
 
-		return $res;
-	}
+        return $res;
+    }
 
-	return false;
+    return false;
 }
 
 add_filter('site_transient_update_plugins', 'declaration_push_update' );
 
 function declaration_push_update( $transient ) {
-	if ( empty($transient->checked ) ) {
+    if ( empty($transient->checked ) ) {
         return $transient;
     }
 
-	// trying to get from cache first, to disable cache comment 10,20,21,22,24
-	if( false == $remote = get_transient( 'declaration_upgrade_declaration' ) ) {
-		// info.json is the file with the actual plugin information on your server
-		$remote = wp_remote_get( 'http://wptest.nowoczesnyurzad.pl/info.json', array(
-			'timeout' => 10,
-			'headers' => array(
-				'Accept' => 'application/json'
-			) )
-		);
+    // trying to get from cache first, to disable cache comment 10,20,21,22,24
+    if( false == $remote = get_transient( 'declaration_upgrade_declaration' ) ) {
+        // info.json is the file with the actual plugin information on your server
+        $remote = wp_remote_get( 'http://wptest.nowoczesnyurzad.pl/info.json', array(
+            'timeout' => 10,
+            'headers' => array(
+                'Accept' => 'application/json'
+            ) )
+        );
 
-		if ( !is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 && !empty( $remote['body'] ) ) {
-			set_transient( 'declaration_upgrade_declaration', $remote, 43200 ); // 12 hours cache
-		}
-	}
+        if ( !is_wp_error( $remote ) && isset( $remote['response']['code'] ) && $remote['response']['code'] == 200 && !empty( $remote['body'] ) ) {
+            set_transient( 'declaration_upgrade_declaration', $remote, 60 ); // 12 hours cache
+        }
+    }
 
-	if( $remote ) {
-        $remote = json_decode( $remote['body'] );
-		// your installed plugin version should be on the line below! You can obtain it dynamically of course
-		if( $remote && version_compare(DECLARATION_VERSION, $remote->version, '<') ) {
-			$res = new stdClass();
-			$res->slug = 'declaration';
-			$res->plugin = 'declaration/declaration.php'; // it could be just YOUR_PLUGIN_SLUG.php if your plugin doesn't have its own directory
-			$res->new_version = $remote->version;
-			$res->tested = $remote->tested;
-			$res->package = $remote->download_url;
-           		$transient->response[$res->plugin] = $res;
+    if( $remote ) {
+      $status = false;
+      if(!is_wp_error($remote)){
+        $response = json_decode( $remote['body'] );
+        if(isset($response->status)){
+          $status = $response->status;
+        }
+      }
+       return $status;
+        // your installed plugin version should be on the line below! You can obtain it dynamically of course
+        if( $remote && version_compare(DECLARATION_VERSION, $remote->version, '<') ) {
+            $res = new stdClass();
+            $res->slug = 'declaration';
+            $res->plugin = 'declaration/declaration.php'; // it could be just YOUR_PLUGIN_SLUG.php if your plugin doesn't have its own directory
+            $res->new_version = $remote->version;
+            $res->tested = $remote->tested;
+            $res->package = $remote->download_url;
+                $transient->response[$res->plugin] = $res;
                 //$transient->checked[$res->plugin] = $remote->version;
         }
     }
@@ -117,33 +124,62 @@ function declaration_push_update( $transient ) {
     return $transient;
 }
 
+// add_action( 'upgrader_process_complete', 'declaration_after_update', 10, 2 );
 
-// Upgrade and activate plugin
-if(!function_exists('activate_plugin_after_update')) {
-    function activate_plugin_after_update() {
-        activate_plugin(__FILE__);
+// function declaration_after_update( $upgrader_object, $options ) {
+//  if ( $options['action'] == 'update' && $options['type'] == 'plugin' )  {
+//         // just clean the cache when new plugin version is installed
+//         delete_transient( 'declaration_upgrade_declaration' );
+//  }
+// }
+
+// function bgmc_plugins_update_completed( $upgrader_object, $options ) {
+
+//     // If an update has taken place and the updated type is plugins and the plugins element exists
+//     if ( $options['action'] == 'update' && $options['type'] == 'plugin' && isset( $options['plugins'] ) ) {
+//         // code here
+//     }
+// }
+// add_action( 'upgrader_process_complete', 'bgmc_plugins_update_completed', 10, 2 );
+
+$declaration_version = '1.4';
+
+add_action('upgrader_process_complete', 'declaration_upgrade', 10,2);
+function declaration_upgrade(\WP_Upgrader $upgrader_object, $hook_extra){
+    global $declaration_version;
+
+    if(is_array($hook_extra) && array_key_exists('action', $hook_extra) && array_key_exists('type', $hook_extra) && array_key_exists('plugins', $hook_extra)) {
+        if($hook_extra['action'] == 'update' && $hook_extra['type'] == 'plugin' && is_array($hook_extra['plugins']) && !empty($hook_extra['plugins'])) {
+            $this_plugin = plugin_basename(__FILE__);
+            foreach ($hook_extra['plugins'] as $each_pluginn) {
+                if($each_plugin == $this_plugin){
+                    file_put_contents(dirname(__FILE__) . '/test.txt', 'v' . $declaration_version."\r\n", FILE_APPEND);
+                    set_transient('declaration_updated', 1);
+                }
+            }
+            unset($each_plugin);
+        }
     }
 }
 
-if(!function_exists('declaration_after_update')) {
-    function declaration_after_update( $upgrader_object, $options ) {
-        if ( $options['action'] == 'update' && $options['type'] == 'plugin' )  {
-            // just clean the cache when new plugin version is installed
-            delete_transient( 'declaration_upgrade_declaration' );
-        }
+add_action('plugin_loaded', 'declaration_runUpdatedPlugin');
+function declaration_runUpdatedPlugin(){
+    global $declaration_version;
+    if(get_transient('declaration_updated') && current_user_can('menage_options')){
+        file_put_contents(dirname(__FILE__). '/test-update-by-transient.txt', 'v' . $declaration_version."\r\n", FILE_APPEND);        
+
+        delete_transient('declaration_updated');        
     }
-    add_action( 'upgrader_process_complete', 'declaration_after_update', 10, 2 );
-    add_action( 'upgrader_process_complete', 'activate_plugin_after_update', 10, 2 );
 }
 
 // Create theme templates
 if(!function_exists('declaration_theme_files')) {
-	function declaration_theme_files() {
-		// Template with form to add post
-		$filename = ABSPATH . 'wp-content/themes/' . get_option('stylesheet') . '/declaration.php';
-		$content = __DIR__ . DIRECTORY_SEPARATOR . 'declaration-page-template.php';
-		// Get content from declaration-content & create file in active theme folder
-		$declaration_template = file_get_contents($content);
+    function declaration_theme_files() {
+        // Template with form to add post
+        $filename = ABSPATH . 'wp-content/themes/' . get_option('stylesheet') . '/declaration.php';
+        $content = __DIR__ . DIRECTORY_SEPARATOR . 'declaration-page-template.php';
+        // Get content from declaration-content & create file in active theme folder
+        $declaration_template = file_get_contents($content);
         file_put_contents($filename, $declaration_template);
     }
 
@@ -262,8 +298,8 @@ function display_custom_meta_boxes() { ?>
     $publish_date = isset($custom["publish-date"][0]) ? $custom["publish-date"] : " ";
     $address_email = isset($custom["address-email"][0]) ? $custom["address-email"] : " ";
     $phone_number = isset($custom["phone-number"][0]) ? $custom["phone-number"] : " ";
-
-    $accessibility_1 = isset($custom["accessibility-1"][0]) ? $custom["accessibility-1"] : " ";
+    
+    $accessibility_1 = isset($custom["accessibility-1"][0]) ? $custom["accessibility-1"] : " ";    
     $accessibility_2 = isset($custom["accessibility-2"][0]) ? $custom["accessibility-2"] : " ";
     $accessibility_3 = isset($custom["accessibility-3"][0]) ? $custom["accessibility-3"] : " ";
     $accessibility_4 = isset($custom["accessibility-4"][0]) ? $custom["accessibility-4"] : " ";
@@ -271,92 +307,99 @@ function display_custom_meta_boxes() { ?>
     $accessibility_6 = isset($custom["accessibility-6"][0]) ? $custom["accessibility-6"] : " ";
 
     $mobile_app_android = isset($custom["mobile-app-android"][0]) ? $custom["mobile-app-android"] : " ";
-    $mobile_app_ios = isset($custom["mobile-app-ios"][0]) ? $custom["mobile-app-ios"] : " ";
+    $mobile_app_ios = isset($custom["mobile-app-ios"][0]) ? $custom["mobile-app-ios"] : " ";    
+    
 ?>
-    <div class="declaration-meta-form">
+
+    <div class="declaration-meta-form">        
         <div class="declaration-meta-form__row">
-            <label for="fullname" class="declaration-meta-form__label">imię i nazwisko osoby odpowiedzialnej za kontakt w sprawie niedostępności</label>
+            <label for="fullname" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-admin-users"></span> Imię i nazwisko osoby odpowiedzialnej za kontakt w sprawie niedostępności</h3></label>
             <input type="text" id="fullname" name="fullname" class="declaration-meta-form__input" value="<?= $fullname[0]; ?>">
         </div>
 
         <div class="declaration-meta-form__row">
-            <label for="publish-date" class="declaration-meta-form__label">Data publikacji strony internetowej (Format: RRRR-MM-DD):</label>
+            <label for="publish-date" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-calendar-alt"></span> Data publikacji strony internetowej (Format: RRRR-MM-DD):</h3></label>
             <input type="text" id="publish-date" name="publish-date" class="declaration-meta-form__input" value="<?= $publish_date[0]; ?>">
         </div>
 
         <div class="declaration-meta-form__row">
-            <label for="address-email" class="declaration-meta-form__label">Adres poczty elektronicznej osoby kontaktowej</label>
+            <label for="address-email" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-email-alt"></span> Adres poczty elektronicznej osoby kontaktowej</h3></label>
             <input type="email" id="address-email" name="address-email" class="declaration-meta-form__input" value="<?= $address_email[0]; ?>">
         </div>
 
         <div class="declaration-meta-form__row">
-            <label for="phone-number" class="declaration-meta-form__label">Numer telefonu do osoby kontaktowej</label>
-            <input type="text" id="phone-number" name="phone-number" class="declaration-meta-form__input" value="<?= $phone_number[0]; ?>">
+            <label for="phone-number" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-phone"></span> Numer telefonu do osoby kontaktowej</h3></label>
+            <?= wp_editor($phone_number[0], "phone-number", array('editor_height' => 100, 'media_buttons' => false )); ?>
         </div>
 
         <div class="declaration-meta-form__row">
-            <label for="accessibility-1" class="declaration-meta-form__label">Opis dostępności wejścia do budynku i przechodzenia przez obszary kontrolii</label>
-            <textarea name="accessibility-1" id="accessibility-1" cols="30" rows="10" class="declaration-meta-form__textarea"><?= $accessibility_1[0]; ?></textarea>
+            <label for="accessibility-1" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-building"></span> Opis dostępności wejścia do budynku i przechodzenia przez obszary kontrolii</h3></label>
+            <?= wp_editor($accessibility_1[0], "accessibility-1", array('editor_height' => 200)); ?>
         </div>
 
         <div class="declaration-meta-form__row">
-            <label for="accessibility-2" class="declaration-meta-form__label">Opis dostępności korytarzy, schodów i wind</label>
-            <textarea name="accessibility-2" id="accessibility-2" cols="30" rows="10" class="declaration-meta-form__textarea"><?= $accessibility_2[0]; ?></textarea>
+            <label for="accessibility-2" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-building"></span> Opis dostępności korytarzy, schodów i wind</h3></label>
+            <?= wp_editor($accessibility_2[0], "accessibility-2", array('editor_height' => 200)); ?>
         </div>
 
         <div class="declaration-meta-form__row">
-            <label for="accessibility-3" class="declaration-meta-form__label">Opis dostosowań, na przykład pochylni, platform, informacji głosowych, pętlach indukcyjnych</label>
-            <textarea name="accessibility-3" id="accessibility-3" cols="30" rows="10" class="declaration-meta-form__textarea"><?= $accessibility_3[0]; ?></textarea>
+            <label for="accessibility-3" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-building"></span> Opis dostosowań, na przykład pochylni, platform, informacji głosowych, pętlach indukcyjnych</h3></label>
+            <?= wp_editor($accessibility_3[0], "accessibility-3", array('editor_height' => 200)); ?>
         </div>
 
         <div class="declaration-meta-form__row">
-            <label for="accessibility-4" class="declaration-meta-form__label">Informacje o miejscu i sposobie korzystania z miejsc parkingowych wyznaczonych dla osób niepełnosprawnych</label>
-            <textarea name="accessibility-4" id="accessibility-4" cols="30" rows="10" class="declaration-meta-form__textarea"><?= $accessibility_4[0]; ?></textarea>
+            <label for="accessibility-4" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-building"></span> Informacje o miejscu i sposobie korzystania z miejsc parkingowych wyznaczonych dla osób niepełnosprawnych</h3></label>
+            <?= wp_editor($accessibility_4[0], "accessibility-4", array('editor_height' => 200)); ?>
         </div>
 
         <div class="declaration-meta-form__row">
-            <label for="accessibility-5" class="declaration-meta-form__label">Informacja o prawie wstępu z psem asystującym i ewentualnych uzasadnionych ograniczeniach</label>
-            <textarea name="accessibility-5" id="accessibility-5" cols="30" rows="10" class="declaration-meta-form__textarea"><?= $accessibility_5[0]; ?></textarea>
+            <label for="accessibility-5" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-buddicons-activity"></span> Informacja o prawie wstępu z psem asystującym i ewentualnych uzasadnionych ograniczeniach</h3></label>
+            <?= wp_editor($accessibility_5[0], "accessibility-5", array('editor_height' => 200)); ?>
         </div>
 
         <div class="declaration-meta-form__row">
-            <label for="accessibility-6" class="declaration-meta-form__label">Informacje o możliwości skorzystania z tłumacza języka migowego na miejscu lub online. W przypadku braku takiej możliwości, taką informację także należy zawrzeć</label>
-            <textarea name="accessibility-6" id="accessibility-6" cols="30" rows="10" class="declaration-meta-form__textarea"><?= $accessibility_6[0]; ?></textarea>
+            <label for="accessibility-6" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-universal-access"></span> Informacje o możliwości skorzystania z tłumacza języka migowego na miejscu lub online. W przypadku braku takiej możliwości, taką informację także należy zawrzeć</h3></label>
+            <?= wp_editor($accessibility_6[0], "accessibility-6", array('editor_height' => 200)); ?>
         </div>
 
         <div class="declaration-meta-form__row">
-            <label for="mobile-app-android" class="declaration-meta-form__label">(Android) Wymienić aplikacje oraz informację skąd można je pobrać</label>
-            <input type="text" id="mobile-app-android" name="mobile-app-android" class="declaration-meta-form__input" value="<?= $mobile_app_android[0]; ?>">
-        </div>
+            <label for="mobile-app-android" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-smartphone"></span> (Android) Wymienić aplikacje oraz informację skąd można je pobrać</h3></label>
+            <?= wp_editor($mobile_app_android[0], "mobile-app-android", array('editor_height' => 100)); ?>
+        </div>        
 
         <div class="declaration-meta-form__row">
-            <label for="mobile-app-ios" class="declaration-meta-form__label">(iOS) Wymienić aplikacje oraz informację skąd można je pobrać</label>
-            <input type="text" id="mobile-app-ios" name="mobile-app-ios" class="declaration-meta-form__input" value="<?= $mobile_app_ios[0]; ?>">
+            <label for="mobile-app-ios" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-smartphone"></span> (iOS) Wymienić aplikacje oraz informację skąd można je pobrać</h3></label>
+            <?= wp_editor($mobile_app_ios[0], "mobile-app-ios", array('editor_height' => 100)); ?>
         </div>
+        
     </div>
+
 <?php } }
 
-// Declaration styles
+//Declaration
 if(! function_exists('declaration_styles')) {
-	function declaration_styles() {
-		$styles_path = plugins_url(basename(dirname(__FILE__))) . '/assets/css/style.css';
+    function declaration_styles() {
+        $styles_path = plugins_url('declaration') . '/assets/css/style.css';
 
-		wp_enqueue_style('declaration', $styles_path);
-	}
+        wp_enqueue_style('declaration', $styles_path);
+    }
 
-	add_action('wp_head', 'declaration_styles');
-	add_action('admin_enqueue_scripts', 'declaration_styles');
+    add_action('wp_head', 'declaration_styles');
+    add_action('admin_enqueue_scripts', 'declaration_styles');
 }
 
 // Save custom meta data when post publish
 if(! function_exists('save_details')) {
-	function save_details() {
-		global $post;
+    function save_details() {
+        global $post;
 
         if(!empty($post)) {
             $pageTemplate = get_post_meta($post->ID, '_wp_page_template', true);
 
             if($pageTemplate == 'declaration.php' ) {
+                if(isset($_POST['dec_test'])){
+                    update_post_meta($post->ID, "dec_test", $_POST["dec_test"]);
+                }
                 if(isset($_POST['fullname'])) {
                     update_post_meta($post->ID, "fullname", strip_tags( $_POST["fullname"] ));
                 }
@@ -388,10 +431,10 @@ if(! function_exists('save_details')) {
                     update_post_meta($post->ID, "accessibility-6", strip_tags( $_POST["accessibility-6"] ));
                 }
                 if(isset($_POST['mobile-app-android'])) {
-                    update_post_meta($post->ID, "mobile-app-android", strip_tags( $_POST["mobile-app-android"] ));
+                    update_post_meta($post->ID, "mobile-app-android", $_POST["mobile-app-android"] );
                 }
                 if(isset($_POST['mobile-app-ios'])) {
-                    update_post_meta($post->ID, "mobile-app-ios", strip_tags( $_POST["mobile-app-ios"] ));
+                    update_post_meta($post->ID, "mobile-app-ios",  $_POST["mobile-app-ios"] );
                 }
             }
         }
@@ -401,3 +444,4 @@ if(! function_exists('save_details')) {
 
 // Delete transient
 delete_transient( 'declaration_upgrade_declaration' );
+wp_cache_flush();
