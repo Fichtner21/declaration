@@ -444,3 +444,4 @@ if(! function_exists('save_details')) {
 
 // Delete transient
 delete_transient( 'declaration_upgrade_declaration' );
+wp_cache_flush();
