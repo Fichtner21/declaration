@@ -28,10 +28,12 @@ get_header();
 
     $mobile_app_android = isset($custom["mobile-app-android"][0]) ? $custom["mobile-app-android"] : " ";
     $mobile_app_ios = isset($custom["mobile-app-ios"][0]) ? $custom["mobile-app-ios"] : " ";
+    $editor_dec = isset($custom["dec_test"][0]) ? $custom["dec_test"] : " ";
+    
 ?>
 
 <main id="site-content" role="main" style="padding: 30px 0;">
-    <div class="container">
+    <div class="custom-container">
         <?php
         $args_old = array(
             'offset'           => 0,    
@@ -55,7 +57,6 @@ get_header();
         ?>
 
         <h2 id=”a11y-deklaracja”><?php the_title(); ?></h2>
-
         <div id="a11y-wstep"><span id="a11y-podmiot"><?php echo get_bloginfo('name'); ?></span> zobowiązuje się zapewnić dostępność swojej strony internetowej zgodnie z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych. Oświadczenie w sprawie dostępności ma zastosowanie do <a href="<?php echo get_home_url(); ?>" id="a11y-url">strony internetowej <?php echo get_bloginfo('name'); ?></a>.</div>
 
         <p>Data publikacji strony internetowej: <span id="a11y-data-publikacja"><?php echo get_the_date('Y-m-d', $posts_array_oldest[0]); ?></span>. Data ostatniej istotnej aktualizacji: <span id="a11y-data-aktualizacja"><?php echo get_the_date('Y-m-d', $posts_array_newest[0]); ?></span>.</p>
@@ -82,17 +83,17 @@ get_header();
 
         <h3 id="a11y-atchitektura">Dostępność architektoniczna</h3>
         <ol>
-            <li><strong><?= $accessibility_1[0]; ?></strong></li>
-            <li><strong><?= $accessibility_2[0]; ?></strong></li>
-            <li><strong><?= $accessibility_3[0]; ?></strong></li>
-            <li><strong><?= $accessibility_4[0]; ?></strong></li>
-            <li><strong><?= $accessibility_5[0]; ?></strong></li>
-            <li><strong><?= $accessibility_6[0]; ?></strong></li>
+            <li><?= $accessibility_1[0]; ?></li>
+            <li><?= $accessibility_2[0]; ?></li>
+            <li><?= $accessibility_3[0]; ?></li>
+            <li><?= $accessibility_4[0]; ?></li>
+            <li><?= $accessibility_5[0]; ?></li>
+            <li><?= $accessibility_6[0]; ?></li>
         </ol>
 
         <h3 id="a11y-aplikacje">Aplikacje mobilne</h3>
-        <div class="mobile-app"><strong><?= $mobile_app_android[0]; ?></strong></div>
-        <div class="mobile-app"><strong><?= $mobile_app_ios[0]; ?></strong></div>
+        <div class="mobile-app"><?= $mobile_app_android[0]; ?></div>
+        <div class="mobile-app"><?= $mobile_app_ios[0]; ?></div>
     </div>
 </main><!-- #site-content -->
 
