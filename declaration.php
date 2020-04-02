@@ -4,7 +4,7 @@
 * Description: Wtyczka tworzy stronę z deklaracją dostępności.
 * Author: Przemysław Drożniak & Ernest Fichtner
 * Text Domain: declaration
-* Version: 2.0
+* Version: 2.1
 */
 
 if(defined('WP_DEBUG') && WP_DEBUG) {
@@ -26,7 +26,7 @@ $myUpdateChecker->setAuthentication('2c9375641f1b85448fd18e4500de6210019a3157');
 //Optional: Set the branch that contains the stable release.
 $myUpdateChecker->setBranch('master');
 
-//
+//Enable realese assets
 $myUpdateChecker->getVcsApi()->enableReleaseAssets();
 
 // Create theme templates
