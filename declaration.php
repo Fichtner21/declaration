@@ -12,7 +12,7 @@ if(defined('WP_DEBUG') && WP_DEBUG) {
 }
 
 // Update Checker
-require dirname(__FILE__) . '/plugin-update-checker-master/plugin-update-checker.php';
+require dirname(__FILE__) . '/plugin-update-checker/plugin-update-checker.php';
 
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	'http://wptest.nowoczesnyurzad.pl/plugin.json',
