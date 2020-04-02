@@ -15,10 +15,19 @@ if(defined('WP_DEBUG') && WP_DEBUG) {
 require dirname(__FILE__) . '/plugin-update-checker/plugin-update-checker.php';
 
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-	'http://wptest.nowoczesnyurzad.pl/plugin.json',
+	'https://github.com/Fichtner21/declaration/',
 	__FILE__, //Full path to the main plugin file or functions.php.
 	'declaration'
 );
+
+//Optional: If you're using a private repository, specify the access token like this:
+$myUpdateChecker->setAuthentication('2c9375641f1b85448fd18e4500de6210019a3157');
+
+//Optional: Set the branch that contains the stable release.
+$myUpdateChecker->setBranch('master');
+
+//
+$myUpdateChecker->getVcsApi()->enableReleaseAssets();
 
 // Create theme templates
 if(!function_exists('declaration_theme_files')) {
