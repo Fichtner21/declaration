@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Wtyczka tworząca stronę deklaracji dostępności
 
-== Opis ==
+== Description ==
 
 Warunki techniczne publikacji oraz struktura dokumentu elektronicznego "Deklaracji Dostępności"
 Na podstawie art. 12 pkt 7 ustawy z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych (Dz. U. poz. 848), dalej zwanej „ustawą o dostępności cyfrowej”, niniejszy dokument określa warunki techniczne publikacji Deklaracji Dostępności oraz strukturę dokumentu elektronicznego Deklaracji Dostępności..
@@ -54,7 +54,7 @@ gdzie xxxx jest adresem internetowym Deklaracji Dostępności strony internetowe
 * a11y-architektura: sekcja z informacjami o dostępności architektonicznej.
 * a11y-aplikacje: sekcja z informacjami o aplikacjach.
 
-== Instalacja ==
+== Installation ==
 
 Aktywowanie wtyczki tworzy automatycznie stronę z deklaracją dostępności pod adresem "ADRES_TWOJEJ_STRONY/deklaracja-dostepnosci/".
 W celu uzupełnienia brakujących treści należy edytować stronę Deklaracji Dostępności, która znajduje się kokpicie WordPressa w zakładce "Strony > Deklaracja Dostępności (edytuj)".
