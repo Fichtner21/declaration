@@ -1,6 +1,6 @@
 === Declaration ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: https://example.com/
+Contributors: Fichtner21, Interakcjo
+Donate link: https://github.com/Fichtner21/declaration
 Tags: comments, spam
 Requires at least: 3.0
 Tested up to: 5.4
@@ -9,109 +9,54 @@ Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-(Required) Plugin description. Basic HTML can be used in all sections.
+Wtyczka tworząca stronę deklaracji dostępności
 
-== Description ==
+== Opis ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+Warunki techniczne publikacji oraz struktura dokumentu elektronicznego "Deklaracji Dostępności"
+Na podstawie art. 12 pkt 7 ustawy z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych (Dz. U. poz. 848), dalej zwanej „ustawą o dostępności cyfrowej”, niniejszy dokument określa warunki techniczne publikacji Deklaracji Dostępności oraz strukturę dokumentu elektronicznego Deklaracji Dostępności..
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+Ustawa o dostępności cyfrowej zobowiązuje w art. 10 podmioty publiczne do sporządzania i publikowania Deklaracji Dostępności. Celem publikacji Deklaracji Dostępności jest umożliwienie zapoznania się z informacjami dotyczącymi dostępności podmiotu publicznego. Informacje te przydadzą się przede wszystkim osobom z niepełnosprawnościami, które będą dzięki temu wiedzieć, jakie pomoce czy rozwiązania wspierające są dostępne w odniesieniu do danego podmiotu.
 
-A few notes about the sections above:
+Warunki techniczne odnoszą się zarówno do Deklaracji Dostępności strony internetowej, jak i Deklaracji Dostępności aplikacji mobilnej. Używane pojęcie „strona internetowa” należy w przypadku aplikacji mobilnej  zamieniać na „aplikacja mobilna”. Różnice pomiędzy Deklaracjami Dostępności strony internetowej i aplikacji mobilnej są opisane w treści wymagań technicznych.
 
-*   "Contributors" is a comma separated list of wordpress.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
+Deklaracja dostępności jest przygotowana w formacie HTML, w jego dowolnej wersji.
 
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
+Deklaracja dostępności spełnia wymagania zawarte w art. 5 ustawy o dostępności cyfrowej, nawet jeżeli sama strona internetowa lub aplikacja mobilna ich nie spełnia. Oznacza to, że Deklaracja Dostępności musi być w pełni dostępna cyfrowo.
 
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+# Link do deklaracji dostępności
 
-== Installation ==
+Link do Deklaracji Dostępności powinien być łatwy do odnalezienia na stronie głównej, wczytywanej jako pierwsza po wpisaniu adresu strony internetowej lub w miejscu zawsze wyświetlanym na wszystkich podstronach strony internetowej na przykład w stopce lub nagłówku. Dobrą praktyką jest umieszczenie w nagłówku wszystkich podstron strony internetowej metatagu zawierającego link do Deklaracji Dostępności, według poniższego wzoru:
 
-This section describes how to install the plugin and get it working.
+<meta name=”deklaracja-dostępności” content=”http://xn--xxxx-jb7a”>
 
-e.g.
+gdzie xxxx jest adresem internetowym Deklaracji Dostępności strony internetowej.
 
-1. Upload the plugin files to the `/wp-content/plugins/plugin-name` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
-1. Use the Settings->Plugin Name screen to configure the plugin
-1. (Make your instructions match the desired user flow for activating and installing your plugin. Include any steps that might be needed for explanatory purposes)
+# W Deklaracji stosowane są poniższe identyfikatory:
 
+* a11y-deklaracja: Nagłówek poziomu 1 z tytułem dokumentu „Deklaracja dostępności” – przykład:
+* <h2 id=”a11y-deklaracja”>Deklaracja dostępności</h2>;
+* a11y-wstep: obowiązkowe oświadczenie o dostępności;
+* a11y-podmiot: nazwa podmiotu publicznego;
+* a11y-url: adres strony internetowej lub aplikacji mobilnej do pobrania;
+* a11y-data-publikacja: data opublikowania strony internetowej lub wydania aplikacji;
+* a11y-data-aktualizacja: data ostatniej aktualizacji strony internetowej lub aplikacji mobilnej;
+* a11y-status: status pod względem zgodności z ustawą o dostępności cyfrowej;
+* a11y-ocena: link do dokumentu z analizą o nadmiernym obciążeniu. Identyfikator jest opcjonalny;
+* a11y-data-sporzadzenie: data sporządzenia Deklaracji Dostępności;
+* a11y-audytor: nazwa podmiotu zewnętrznego, który przeprowadził badanie dostępności. Identyfikator jest opcjonalny;
+* a11y-kontakt: sekcja z danymi kontaktowymi;
+* a11y-osoba: imię i nazwisko osoby odpowiedzialnej za kontakt w sprawie niedostępności (osoba kontaktowa);
+* a11y-email: adres poczty elektronicznej osoby kontaktowej – przykład:
+* <a id=”a11y-email” href=”mailto: dostepnosc@podmiot-publiczny.pl”>dostepnosc@podmiot-publiczny.pl</a>;
+* a11y-telefon: numer telefonu do osoby kontaktowej;
+* a11y-procedura: opis procedury wnioskowo-skargowej;
+* a11y-architektura: sekcja z informacjami o dostępności architektonicznej.
+* a11y-aplikacje: sekcja z informacjami o aplikacjach.
 
-== Frequently Asked Questions ==
+== Instalacja ==
 
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
-
-== Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+Aktywowanie wtyczki tworzy automatycznie stronę z deklaracją dostępności pod adresem "ADRES_TWOJEJ_STRONY/deklaracja-dostepnosci/".
+W celu uzupełnienia brakujących treści należy edytować stronę Deklaracji Dostępności, która znajduje się kokpicie WordPressa w zakładce "Strony > Deklaracja Dostępności (edytuj)".
 
 == Changelog ==
-
-= 1.0 =
-* A change since the previous version.
-* Another change.
-
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
-
-== Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](https://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: https://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
