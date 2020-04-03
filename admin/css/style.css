@@ -11,9 +11,3 @@
 .declaration-meta-form__textarea {
   width: 100%;
 }
-
-.custom-container {
-	max-width: 1200px;	
-	margin: 0 auto;
-	padding: 20px;
-}
