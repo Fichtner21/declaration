@@ -8,6 +8,15 @@
         <label for="publish-date" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-calendar-alt"></span> Data publikacji strony internetowej (Format: RRRR-MM-DD):</h3></label>
         <input type="text" id="publish-date" name="publish-date" class="declaration-meta-form__input" value="<?= $publish_date[0]; ?>">
     </div>
+    <div class="declaration-meta-form__row">
+        <label for="attention-optional" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-media-document"></span> Uwagi: <span style="font-size: 10px;">(opcjonalne)</span></h3></label>
+        <?= wp_editor($attention_optional[0], "attention-optional", array('editor_height' => 100)); ?>
+    </div>
+
+     <div class="declaration-meta-form__row">
+        <label for="page-date" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-calendar"></span> Data sporządzenia oświadczenia o deklaracji dostępności (Format: RRRR-MM-DD):</h3></label>
+        <input type="text" id="page-date" name="page-date" class="declaration-meta-form__input" value="<?= $page_date[0]; ?>">
+    </div>
 
     <div class="declaration-meta-form__row">
         <label for="address-email" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-email-alt"></span> Adres poczty elektronicznej osoby kontaktowej</h3></label>

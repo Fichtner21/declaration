@@ -8,7 +8,7 @@ Plugin Name: Declaration
 Description: Wtyczka tworzy stronę z deklaracją dostępności.
 Author: Przemysław Drożniak & Ernest Fichtner
 Text Domain: declaration
-Version: 1.0.1
+Version: 1.0.2
 */
 
 defined( 'ABSPATH' ) or die('Sorry, you cant access to this site!');
@@ -146,6 +146,8 @@ if(! class_exists('Declaration')) {
             $fullname = isset($custom["fullname"][0]) ? $custom["fullname"] : " ";
             $publish_date = isset($custom["publish-date"][0]) ? $custom["publish-date"] : " ";
             $address_email = isset($custom["address-email"][0]) ? $custom["address-email"] : " ";
+            $page_date = isset($custom["page-date"][0]) ? $custom["page-date"] : " ";
+            $attention_optional = isset($custom["attention-optional"][0]) ? $custom["attention-optional"] : " ";
             $phone_number = isset($custom["phone-number"][0]) ? $custom["phone-number"] : " ";
             
             $accessibility_1 = isset($custom["accessibility-1"][0]) ? $custom["accessibility-1"] : " ";    
@@ -177,6 +179,12 @@ if(! class_exists('Declaration')) {
                     if(isset($_POST['publish-date'])) {
                         update_post_meta($post->ID, "publish-date", strip_tags( $_POST["publish-date"] ));
                     }
+                    if(isset($_POST['page-date'])) {
+                        update_post_meta($post->ID, "page-date", strip_tags( $_POST["page-date"] ));
+                    }
+                    if(isset($_POST['attention-optional'])) {
+                        update_post_meta($post->ID, "attention-optional", $_POST["attention-optional"] );
+                    }
                     if(isset($_POST['address-email'])) {
                         update_post_meta($post->ID, "address-email", strip_tags( $_POST["address-email"] ));
                     }
@@ -184,22 +192,22 @@ if(! class_exists('Declaration')) {
                         update_post_meta($post->ID, "phone-number", strip_tags( $_POST["phone-number"] ));
                     }
                     if(isset($_POST['accessibility-1'])) {
-                        update_post_meta($post->ID, "accessibility-1", strip_tags( $_POST["accessibility-1"] ));
+                        update_post_meta($post->ID, "accessibility-1", $_POST["accessibility-1"] );
                     }
                     if(isset($_POST['accessibility-2'])) {
-                        update_post_meta($post->ID, "accessibility-2", strip_tags( $_POST["accessibility-2"] ));
+                        update_post_meta($post->ID, "accessibility-2", $_POST["accessibility-2"] );
                     }
                     if(isset($_POST['accessibility-3'])) {
-                        update_post_meta($post->ID, "accessibility-3", strip_tags( $_POST["accessibility-3"] ));
+                        update_post_meta($post->ID, "accessibility-3", $_POST["accessibility-3"] );
                     }
                     if(isset($_POST['accessibility-4'])) {
-                        update_post_meta($post->ID, "accessibility-4", strip_tags( $_POST["accessibility-4"] ));
+                        update_post_meta($post->ID, "accessibility-4", $_POST["accessibility-4"] );
                     }
                     if(isset($_POST['accessibility-5'])) {
-                        update_post_meta($post->ID, "accessibility-5", strip_tags( $_POST["accessibility-5"] ));
+                        update_post_meta($post->ID, "accessibility-5", $_POST["accessibility-5"] );
                     }
                     if(isset($_POST['accessibility-6'])) {
-                        update_post_meta($post->ID, "accessibility-6", strip_tags( $_POST["accessibility-6"] ));
+                        update_post_meta($post->ID, "accessibility-6", $_POST["accessibility-6"] );
                     }
                     if(isset($_POST['mobile-app-android'])) {
                         update_post_meta($post->ID, "mobile-app-android", $_POST["mobile-app-android"] );

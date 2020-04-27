@@ -15,6 +15,9 @@ get_header();
     
     $fullname = isset($custom["fullname"][0]) ? $custom["fullname"] : " ";
     $address_email = isset($custom["address-email"][0]) ? $custom["address-email"] : " ";
+    $publish_date = isset($custom["publish-date"][0]) ? $custom["publish-date"] : " ";
+    $page_date = isset($custom["page-date"][0]) ? $custom["page-date"] : " ";
+    $attention_optional = isset($custom["attention-optional"][0]) ? $custom["attention-optional"] : " ";
     $phone_number = isset($custom["phone-number"][0]) ? $custom["phone-number"] : " ";
 
     $accessibility_1 = isset($custom["accessibility-1"][0]) ? $custom["accessibility-1"] : " ";
@@ -57,7 +60,7 @@ get_header();
         <h2 id=”a11y-deklaracja”><?php the_title(); ?></h2>
         <div id="a11y-wstep"><span id="a11y-podmiot"><?php echo get_bloginfo('name'); ?></span> zobowiązuje się zapewnić dostępność swojej strony internetowej zgodnie z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych. Oświadczenie w sprawie dostępności ma zastosowanie do <a href="<?php echo get_home_url(); ?>" id="a11y-url">strony internetowej <?php echo get_bloginfo('name'); ?></a>.</div>
 
-        <p>Data publikacji strony internetowej: <span id="a11y-data-publikacja"><?php echo get_the_date('Y-m-d', $posts_array_oldest[0]); ?></span>. Data ostatniej istotnej aktualizacji: <span id="a11y-data-aktualizacja"><?php echo get_the_date('Y-m-d', $posts_array_newest[0]); ?></span>.</p>
+        <p>Data publikacji strony internetowej: <span id="a11y-data-publikacja"><?= $date_exist = ($publish_date[0] == true) ? $publish_date[0] : get_the_date('Y-m-d', $posts_array_oldest[0]); ?></span>. Data ostatniej istotnej aktualizacji: <span id="a11y-data-aktualizacja"><?php echo get_the_date('Y-m-d', $posts_array_newest[0]); ?></span>.</p>
 
         <div id="a11y-status">Strona internetowa jest częściowo zgodna z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych z powodu niezgodności lub wyłączeń wymienionych poniżej:
             <ul>
@@ -71,8 +74,8 @@ get_header();
                 <li>filmy zostały opublikowane przed wejściem w życie ustawy o dostępności cyfrowej</li>
             </ul>
         </div>
-
-        <p>Oświadczenie sporządzono dnia: <span id="a11y-data-sporzadzenie"><?php echo get_the_date('Y-m-d'); ?></span>. Deklarację sporządzono na podstawie samooceny przeprowadzonej przez podmiot publiczny.</p>
+        <div><?= $attention_optional[0]; ?></div>
+        <p>Oświadczenie sporządzono dnia: <span id="a11y-data-sporzadzenie"><?= $page_date[0]; ?></span>. Deklarację sporządzono na podstawie samooceny przeprowadzonej przez podmiot publiczny.</p>
 
         <h3 id="a11y-kontakt">Informacje zwrotne i dane kontaktowe</h3>
         <p>W przypadku problemów z dostępnością strony internetowej prosimy o kontakt. Osobą kontaktową jest  <span id="a11y-osoba"><strong><?= $fullname[0]; ?></strong></span>, <span id="a11y-email"><strong><?= $address_email[0]; ?></strong></span>. Kontaktować można się także dzwoniąc na numer telefonu <span id="a11y-telefon"><strong><?= $phone_number[0]; ?></strong></span>. Tą samą drogą można składać wnioski o udostępnienie informacji niedostępnej oraz składać żądania zapewnienia dostępności.</p>
