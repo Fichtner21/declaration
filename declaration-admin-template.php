@@ -8,9 +8,15 @@
         <label for="publish-date" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-calendar-alt"></span> Data publikacji strony internetowej (Format: RRRR-MM-DD):</h3></label>
         <input type="text" id="publish-date" name="publish-date" class="declaration-meta-form__input" value="<?= $publish_date[0]; ?>">
     </div>
+
+    <div class="declaration-meta-form__row">
+        <label for="update-date" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-calendar-alt"></span>Data ostatniej istotnej aktualizacji (Format: RRRR-MM-DD):</h3></label>
+        <input type="text" id="update-date" name="update-date" class="declaration-meta-form__input" value="<?= $update_date[0]; ?>">
+    </div>
+
     <div class="declaration-meta-form__row">
         <label for="attention-optional" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-media-document"></span> Uwagi: <span style="font-size: 10px;">(opcjonalne)</span></h3></label>
-        <?= wp_editor($attention_optional[0], "attention-optional", array('editor_height' => 100)); ?>
+        <?= wp_editor($attention_optional[0], "attention-optional", array('editor_height' => 100, 'quicktags' => false)); ?>
     </div>
 
      <div class="declaration-meta-form__row">
@@ -25,46 +31,46 @@
 
     <div class="declaration-meta-form__row">
         <label for="phone-number" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-phone"></span> Numer telefonu do osoby kontaktowej</h3></label>
-        <?= wp_editor($phone_number[0], "phone-number", array('editor_height' => 100, 'media_buttons' => false )); ?>
+        <?= wp_editor($phone_number[0], "phone-number", array('editor_height' => 100, 'media_buttons' => false, 'quicktags' => false )); ?>
     </div>
 
     <div class="declaration-meta-form__row">
         <label for="accessibility-1" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-building"></span> Opis dostępności wejścia do budynku i przechodzenia przez obszary kontrolii</h3></label>
-        <?= wp_editor($accessibility_1[0], "accessibility-1", array('editor_height' => 200)); ?>
+        <?= wp_editor($accessibility_1[0], "accessibility-1", array('editor_height' => 200, 'quicktags' => false )); ?>
     </div>
 
     <div class="declaration-meta-form__row">
         <label for="accessibility-2" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-building"></span> Opis dostępności korytarzy, schodów i wind</h3></label>
-        <?= wp_editor($accessibility_2[0], "accessibility-2", array('editor_height' => 200)); ?>
+        <?= wp_editor($accessibility_2[0], "accessibility-2", array('editor_height' => 200, 'quicktags' => false)); ?>
     </div>
 
     <div class="declaration-meta-form__row">
         <label for="accessibility-3" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-building"></span> Opis dostosowań, na przykład pochylni, platform, informacji głosowych, pętlach indukcyjnych</h3></label>
-        <?= wp_editor($accessibility_3[0], "accessibility-3", array('editor_height' => 200)); ?>
+        <?= wp_editor($accessibility_3[0], "accessibility-3", array('editor_height' => 200, 'quicktags' => false)); ?>
     </div>
 
     <div class="declaration-meta-form__row">
         <label for="accessibility-4" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-building"></span> Informacje o miejscu i sposobie korzystania z miejsc parkingowych wyznaczonych dla osób niepełnosprawnych</h3></label>
-        <?= wp_editor($accessibility_4[0], "accessibility-4", array('editor_height' => 200)); ?>
+        <?= wp_editor($accessibility_4[0], "accessibility-4", array('editor_height' => 200, 'quicktags' => false)); ?>
     </div>
 
     <div class="declaration-meta-form__row">
         <label for="accessibility-5" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-buddicons-activity"></span> Informacja o prawie wstępu z psem asystującym i ewentualnych uzasadnionych ograniczeniach</h3></label>
-        <?= wp_editor($accessibility_5[0], "accessibility-5", array('editor_height' => 200)); ?>
+        <?= wp_editor($accessibility_5[0], "accessibility-5", array('editor_height' => 200, 'quicktags' => false)); ?>
     </div>
 
     <div class="declaration-meta-form__row">
         <label for="accessibility-6" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-universal-access"></span> Informacje o możliwości skorzystania z tłumacza języka migowego na miejscu lub online. W przypadku braku takiej możliwości, taką informację także należy zawrzeć</h3></label>
-        <?= wp_editor($accessibility_6[0], "accessibility-6", array('editor_height' => 200)); ?>
+        <?= wp_editor($accessibility_6[0], "accessibility-6", array('editor_height' => 200, 'quicktags' => false)); ?>
     </div>
 
     <div class="declaration-meta-form__row">
         <label for="mobile-app-android" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-smartphone"></span> (Android) Wymienić aplikacje oraz informację skąd można je pobrać</h3></label>
-        <?= wp_editor($mobile_app_android[0], "mobile-app-android", array('editor_height' => 100)); ?>
+        <?= wp_editor($mobile_app_android[0], "mobile-app-android", array('editor_height' => 100, 'quicktags' => false)); ?>
     </div>        
 
     <div class="declaration-meta-form__row">
         <label for="mobile-app-ios" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-smartphone"></span> (iOS) Wymienić aplikacje oraz informację skąd można je pobrać</h3></label>
-        <?= wp_editor($mobile_app_ios[0], "mobile-app-ios", array('editor_height' => 100)); ?>
+        <?= wp_editor($mobile_app_ios[0], "mobile-app-ios", array('editor_height' => 100, 'quicktags' => false)); ?>
     </div>
 </div>

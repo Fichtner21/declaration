@@ -8,7 +8,7 @@ Plugin Name: Declaration
 Description: Wtyczka tworzy stronę z deklaracją dostępności.
 Author: Przemysław Drożniak & Ernest Fichtner
 Text Domain: declaration
-Version: 1.0.2
+Version: 1.0.3
 */
 
 defined( 'ABSPATH' ) or die('Sorry, you cant access to this site!');
@@ -149,6 +149,7 @@ if(! class_exists('Declaration')) {
             $page_date = isset($custom["page-date"][0]) ? $custom["page-date"] : " ";
             $attention_optional = isset($custom["attention-optional"][0]) ? $custom["attention-optional"] : " ";
             $phone_number = isset($custom["phone-number"][0]) ? $custom["phone-number"] : " ";
+            $update_date = isset($custom["update-date"][0]) ? $custom["update-date"] : " ";
             
             $accessibility_1 = isset($custom["accessibility-1"][0]) ? $custom["accessibility-1"] : " ";    
             $accessibility_2 = isset($custom["accessibility-2"][0]) ? $custom["accessibility-2"] : " ";
@@ -181,6 +182,9 @@ if(! class_exists('Declaration')) {
                     }
                     if(isset($_POST['page-date'])) {
                         update_post_meta($post->ID, "page-date", strip_tags( $_POST["page-date"] ));
+                    }
+                    if(isset($_POST['update-date'])) {
+                        update_post_meta($post->ID, "update-date", strip_tags( $_POST["update-date"] ));
                     }
                     if(isset($_POST['attention-optional'])) {
                         update_post_meta($post->ID, "attention-optional", $_POST["attention-optional"] );
