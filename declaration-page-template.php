@@ -21,6 +21,8 @@ get_header();
     $phone_number = isset($custom["phone-number"][0]) ? $custom["phone-number"] : " ";
     $update_date = isset($custom["update-date"][0]) ? $custom["update-date"] : " ";
     $status = isset($custom["status"][0]) ? $custom["status"] : " ";
+    $rating_on = isset($custom["rating_on"][0]) ? $custom["rating_on"] : " ";
+    $rating = isset($custom["rating"][0]) ? $custom["rating"] : " ";
 
     $status_field_1 = isset($custom["status_field_1"][0]) ? $custom["status_field_1"] : " ";
     $status_field_2 = isset($custom["status_field_2"][0]) ? $custom["status_field_2"] : " ";
@@ -85,9 +87,11 @@ get_header();
             </div>
         <?php endif; ?>
 
+        <?php if($rating_on[0] == 'on') : ?>
         <div id="a11y-ocena">
-
+            <a href='<?= $rating[0]; ?>' title='Link do wyniku analizy nadmiernego obciążenia'>Link do wyniku analizy nadmiernego obciążenia</a>
         </div>
+        <?php endif; ?>
 
         <div><?= $attention_optional[0]; ?></div>
         <p>Oświadczenie sporządzono dnia: <span id="a11y-data-sporzadzenie"><?= $page_date[0]; ?></span>. Deklarację sporządzono na podstawie samooceny przeprowadzonej przez podmiot publiczny.</p>

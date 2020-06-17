@@ -157,6 +157,9 @@ if(! class_exists('Declaration')) {
             $status_field_3 = isset($custom["status_field_3"][0]) ? $custom["status_field_3"] : " ";
             $status_field_4 = isset($custom["status_field_4"][0]) ? $custom["status_field_4"] : " ";
 
+            $rating_on = isset($custom["rating_on"][0]) ? $custom["rating_on"] : " ";
+            $rating = isset($custom["rating"][0]) ? $custom["rating"] : " ";
+
             $accessibility_1 = isset($custom["accessibility-1"][0]) ? $custom["accessibility-1"] : " ";
             $accessibility_2 = isset($custom["accessibility-2"][0]) ? $custom["accessibility-2"] : " ";
             $accessibility_3 = isset($custom["accessibility-3"][0]) ? $custom["accessibility-3"] : " ";
@@ -206,6 +209,14 @@ if(! class_exists('Declaration')) {
                     }
                     if(isset($_POST['status'])) {
                         update_post_meta($post->ID, "status", strip_tags( $_POST["status"] ));
+                    }
+                    if(isset($_POST['rating_on']) && $_POST['rating_on'] == 'on' ) {
+                        update_post_meta($post->ID, "rating_on", strip_tags( $_POST["rating_on"] ));
+                    } else {
+                        update_post_meta($post->ID, "rating_on", ' ');
+                    }
+                    if(isset($_POST['rating'])) {
+                        update_post_meta($post->ID, "rating", strip_tags( $_POST["rating"] ));
                     }
                     if(isset($_POST['attention-optional'])) {
                         update_post_meta($post->ID, "attention-optional", $_POST["attention-optional"] );

@@ -46,6 +46,15 @@
     </div>
 
     <div class="declaration-meta-form__row">
+        <label for="rating" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-admin-links"></span> Wynik analizy obciążenia <span style="font-size: 10px;">(opcjonalne)</span></h3></label>
+        <label for='rating_on'><input type="checkbox" name="rating_on" id="rating_on" <?= $rating_on[0] == 'on' ? 'checked' : false; ?>> Zaznacz jeśli chcesz podać wynik analizy obciążenia</label>
+        <?php if($rating_on[0] == 'on') : ?>
+            <p style='margin-bottom: 7px;'>Podaj link to wyniku analizy:</p>
+            <input type="text" id="rating" name="rating" class="declaration-meta-form__input" value="<?= $rating[0]; ?>">
+        <?php endif; ?>
+    </div>
+
+    <div class="declaration-meta-form__row">
         <label for="attention-optional" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-media-document"></span> Uwagi: <span style="font-size: 10px;">(opcjonalne)</span></h3></label>
         <?= wp_editor($attention_optional[0], "attention-optional", array('editor_height' => 100, 'quicktags' => false)); ?>
     </div>
