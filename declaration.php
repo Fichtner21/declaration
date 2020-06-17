@@ -140,9 +140,9 @@ if(! class_exists('Declaration')) {
         }
         function display_custom_meta_boxes() {
             global $post;
-        
+
             $custom = get_post_custom($post->ID);
-        
+
             $fullname = isset($custom["fullname"][0]) ? $custom["fullname"] : " ";
             $publish_date = isset($custom["publish-date"][0]) ? $custom["publish-date"] : " ";
             $address_email = isset($custom["address-email"][0]) ? $custom["address-email"] : " ";
@@ -150,17 +150,23 @@ if(! class_exists('Declaration')) {
             $attention_optional = isset($custom["attention-optional"][0]) ? $custom["attention-optional"] : " ";
             $phone_number = isset($custom["phone-number"][0]) ? $custom["phone-number"] : " ";
             $update_date = isset($custom["update-date"][0]) ? $custom["update-date"] : " ";
-            
-            $accessibility_1 = isset($custom["accessibility-1"][0]) ? $custom["accessibility-1"] : " ";    
+            $status = isset($custom["status"][0]) ? $custom["status"] : " ";
+
+            $status_field_1 = isset($custom["status_field_1"][0]) ? $custom["status_field_1"] : " ";
+            $status_field_2 = isset($custom["status_field_2"][0]) ? $custom["status_field_2"] : " ";
+            $status_field_3 = isset($custom["status_field_3"][0]) ? $custom["status_field_3"] : " ";
+            $status_field_4 = isset($custom["status_field_4"][0]) ? $custom["status_field_4"] : " ";
+
+            $accessibility_1 = isset($custom["accessibility-1"][0]) ? $custom["accessibility-1"] : " ";
             $accessibility_2 = isset($custom["accessibility-2"][0]) ? $custom["accessibility-2"] : " ";
             $accessibility_3 = isset($custom["accessibility-3"][0]) ? $custom["accessibility-3"] : " ";
             $accessibility_4 = isset($custom["accessibility-4"][0]) ? $custom["accessibility-4"] : " ";
             $accessibility_5 = isset($custom["accessibility-5"][0]) ? $custom["accessibility-5"] : " ";
             $accessibility_6 = isset($custom["accessibility-6"][0]) ? $custom["accessibility-6"] : " ";
-        
+
             $mobile_app_android = isset($custom["mobile-app-android"][0]) ? $custom["mobile-app-android"] : " ";
-            $mobile_app_ios = isset($custom["mobile-app-ios"][0]) ? $custom["mobile-app-ios"] : " "; 
-            
+            $mobile_app_ios = isset($custom["mobile-app-ios"][0]) ? $custom["mobile-app-ios"] : " ";
+
             require_once dirname(__FILE__) . '/declaration-admin-template.php' ;
         }
         // Save custom meta data when post publish
@@ -185,6 +191,21 @@ if(! class_exists('Declaration')) {
                     }
                     if(isset($_POST['update-date'])) {
                         update_post_meta($post->ID, "update-date", strip_tags( $_POST["update-date"] ));
+                    }
+                    if(isset($_POST['status_field_1'])) {
+                        update_post_meta($post->ID, "status_field_1", strip_tags( $_POST["status_field_1"] ));
+                    }
+                    if(isset($_POST['status_field_2'])) {
+                        update_post_meta($post->ID, "status_field_2", strip_tags( $_POST["status_field_2"] ));
+                    }
+                    if(isset($_POST['status_field_3'])) {
+                        update_post_meta($post->ID, "status_field_3", strip_tags( $_POST["status_field_3"] ));
+                    }
+                    if(isset($_POST['status_field_4'])) {
+                        update_post_meta($post->ID, "status_field_4", strip_tags( $_POST["status_field_4"] ));
+                    }
+                    if(isset($_POST['status'])) {
+                        update_post_meta($post->ID, "status", strip_tags( $_POST["status"] ));
                     }
                     if(isset($_POST['attention-optional'])) {
                         update_post_meta($post->ID, "attention-optional", $_POST["attention-optional"] );
@@ -226,7 +247,7 @@ if(! class_exists('Declaration')) {
         function restore_page() {
             if(get_page_by_title( 'Deklaracja dostępności' )) {
                 $declaration_page_id = get_option('declaration_page_id');
-                
+
                 wp_untrash_post($declaration_page_id);
             }
         }

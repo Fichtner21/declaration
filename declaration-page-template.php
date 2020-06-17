@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
 * Template Name: Declaration
@@ -12,7 +12,7 @@ get_header();
     global $post;
 
     $custom = get_post_custom($post->ID);
-    
+
     $fullname = isset($custom["fullname"][0]) ? $custom["fullname"] : " ";
     $address_email = isset($custom["address-email"][0]) ? $custom["address-email"] : " ";
     $publish_date = isset($custom["publish-date"][0]) ? $custom["publish-date"] : " ";
@@ -20,6 +20,12 @@ get_header();
     $attention_optional = isset($custom["attention-optional"][0]) ? $custom["attention-optional"] : " ";
     $phone_number = isset($custom["phone-number"][0]) ? $custom["phone-number"] : " ";
     $update_date = isset($custom["update-date"][0]) ? $custom["update-date"] : " ";
+    $status = isset($custom["status"][0]) ? $custom["status"] : " ";
+
+    $status_field_1 = isset($custom["status_field_1"][0]) ? $custom["status_field_1"] : " ";
+    $status_field_2 = isset($custom["status_field_2"][0]) ? $custom["status_field_2"] : " ";
+    $status_field_3 = isset($custom["status_field_3"][0]) ? $custom["status_field_3"] : " ";
+    $status_field_4 = isset($custom["status_field_4"][0]) ? $custom["status_field_4"] : " ";
 
     $accessibility_1 = isset($custom["accessibility-1"][0]) ? $custom["accessibility-1"] : " ";
     $accessibility_2 = isset($custom["accessibility-2"][0]) ? $custom["accessibility-2"] : " ";
@@ -31,28 +37,28 @@ get_header();
     $mobile_app_android = isset($custom["mobile-app-android"][0]) ? $custom["mobile-app-android"] : " ";
     $mobile_app_ios = isset($custom["mobile-app-ios"][0]) ? $custom["mobile-app-ios"] : " ";
     $editor_dec = isset($custom["dec_test"][0]) ? $custom["dec_test"] : " ";
-    
+
 ?>
 
 <main id="site-content" role="main" style="padding: 30px 0;">
     <div class="custom-container">
         <?php
         $args_old = array(
-            'offset'           => 0,    
+            'offset'           => 0,
             'orderby'          => 'date',
-            'order'            => 'ASC',    
-            'post_type'        => array('post', 'page'),    
-            'post_status'      => 'publish'    
+            'order'            => 'ASC',
+            'post_type'        => array('post', 'page'),
+            'post_status'      => 'publish'
         );
 
         $posts_array_oldest = get_posts($args_old);
 
         $args_new = array(
-            'offset'           => 0,    
+            'offset'           => 0,
             'orderby'          => 'date',
-            'order'            => 'DESC',    
-            'post_type'        => array('post', 'page'),    
-            'post_status'      => 'publish'    
+            'order'            => 'DESC',
+            'post_type'        => array('post', 'page'),
+            'post_status'      => 'publish'
         );
 
         $posts_array_newest = get_posts($args_new);
@@ -63,18 +69,26 @@ get_header();
 
         <p>Data publikacji strony internetowej: <span id="a11y-data-publikacja"><?= $date_exist = ($publish_date[0] == true) ? $publish_date[0] : get_the_date('Y-m-d', $posts_array_oldest[0]); ?></span>. Data ostatniej istotnej aktualizacji: <span id="a11y-data-aktualizacja"><?php echo $update_date[0]; ?></span>.</p>
 
-        <div id="a11y-status">Strona internetowa jest częściowo zgodna z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych z powodu niezgodności lub wyłączeń wymienionych poniżej:
-            <ul>
-                <li>filmy nie posiadają napisów dla osób głuchych,</li>
-                <li>część plików nie jest dostępnych cyfrowo, </li>
-                <li>brak odpowiedniej struktury nagłówkowej artykułów, </li>
-            </ul>
-            Wyłączenia:
-            <ul>
-                <li>mapy są wyłączone z obowiązku zapewniania dostępności, </li>
-                <li>filmy zostały opublikowane przed wejściem w życie ustawy o dostępności cyfrowej</li>
-            </ul>
+        <?php if($status[0] == 'zgodna' || $status[0] == ' ') : ?>
+            <div id="a11y-status">Strona internetowa jest częściowo zgodna z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych z powodu niezgodności lub wyłączeń wymienionych poniżej:</div>
+        <?php elseif($status[0] == 'czesciowo-zgodna') : ?>
+            <div id="a11y-status">Strona internetowa jest częściowo zgodna z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych z powodu niezgodności lub wyłączeń wymienionych poniżej:
+                <?= $status_field_1[0]; ?>
+                Wyłączenia:
+                <?= $status_field_2[0]; ?>
+            </div>
+        <?php else : ?>
+            <div id="a11y-status">Strona internetowa jest częściowo zgodna z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych z powodu niezgodności lub wyłączeń wymienionych poniżej:
+                <?= $status_field_3[0]; ?>
+                Wyłączenia:
+                <?= $status_field_4[0]; ?>
+            </div>
+        <?php endif; ?>
+
+        <div id="a11y-ocena">
+
         </div>
+
         <div><?= $attention_optional[0]; ?></div>
         <p>Oświadczenie sporządzono dnia: <span id="a11y-data-sporzadzenie"><?= $page_date[0]; ?></span>. Deklarację sporządzono na podstawie samooceny przeprowadzonej przez podmiot publiczny.</p>
 
