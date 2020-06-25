@@ -114,3 +114,26 @@
         <?= wp_editor($mobile_app_ios[0], "mobile-app-ios", array('editor_height' => 100, 'quicktags' => false)); ?>
     </div>
 </div>
+
+<script>
+
+(function($) {
+    $(document).ready(function() {
+       const $statusInputs = $('input[name="status"]');
+       const $form = $('form[name="post"]');
+
+       $.each($statusInputs, function (index, value) {
+            $(value).on('change', function() {
+                if($(this).val() === 'zgodna') {
+                    $form.submit();
+                } else {
+                    alert('Po odświeżeniu pojawią się dwa nowe pola status. Proszę je uzupełnić.');
+
+                    $form.submit();
+                }
+            });
+       });
+    });
+})(jQuery);
+
+</script>
