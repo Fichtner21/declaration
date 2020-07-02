@@ -122,8 +122,8 @@
        const $statusInputs = $('input[name="status"]');
        const $form = $('form[name="post"]');
 
-       $.each($statusInputs, function (index, value) {
-            $(value).on('change', function() {
+       $.each($statusInputs, function (index, input) {
+            $(input).on('change', function() {
                 if($(this).val() === 'zgodna') {
                     $form.submit();
                 } else {
@@ -132,6 +132,20 @@
                     $form.submit();
                 }
             });
+       });
+
+       const $ratingCheckbox = $('input[name="rating_on"]');
+
+       $ratingCheckbox.on('change', function() {
+        if($(this).val() === 'on') {
+            alert('Po odświeżeniu pojawi się nowe pole do podania linku. Proszę je uzupełnić.');
+
+            $form.submit();
+        } else {
+            alert('Po odświeżeniu zniknie pole z linkiem.');
+
+            $form.submit();
+        }
        });
     });
 })(jQuery);
