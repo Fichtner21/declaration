@@ -11,3 +11,10 @@
 .declaration-meta-form__textarea {
   width: 100%;
 }
+
+.declaration-meta-form__status {
+  display: none;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.05);
+  margin-top: 10px;
+}
