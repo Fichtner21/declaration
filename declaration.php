@@ -265,6 +265,7 @@ if(! class_exists('Declaration')) {
 
         function register_ajax() {
             add_action( 'wp_ajax_change_status', array( $this, 'change_status' ) );
+            add_action( 'wp_ajax_checkbox_change', array( $this, 'checkbox_change' ) );
         }
 
         function change_status() {
@@ -279,6 +280,35 @@ if(! class_exists('Declaration')) {
             } else {
                 $result['type'] = 'error';
                 $result['status'] = $getStatus;
+            }
+
+            // Check if action was fired via Ajax call. If yes, JS code will be triggered, else the user is redirected to the post page
+            if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                $result['request'] = $_REQUEST;
+
+                $result = json_encode($result, JSON_UNESCAPED_UNICODE);
+
+                echo $result;
+            }
+            else {
+                header("Location: ". $_SERVER["HTTP_REFERER"]);
+            }
+
+            die();
+        }
+
+        function checkbox_change() {
+            $custom = get_post_custom( $_REQUEST['postID'] );
+            $getChecked = $custom['rating_on'][0];
+
+            $updateCheckbox = update_post_meta( $_REQUEST['postID'], "rating_on", strip_tags( $_REQUEST['checked'] ) );
+
+            if($updateCheckbox) {
+                $result['type'] = 'success';
+                $result['checked'] = $_REQUEST['checked'];
+            } else {
+                $result['type'] = 'error';
+                $result['checked'] = ' ';
             }
 
             // Check if action was fired via Ajax call. If yes, JS code will be triggered, else the user is redirected to the post page

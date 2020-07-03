@@ -52,10 +52,11 @@
     <div class="declaration-meta-form__row">
         <label for="rating" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-admin-links"></span> Wynik analizy obciążenia <span style="font-size: 10px;">(opcjonalne)</span></h3></label>
         <label for='rating_on'><input type="checkbox" name="rating_on" id="rating_on" <?= $rating_on[0] == 'on' ? 'checked' : false; ?>> Zaznacz jeśli chcesz podać wynik analizy obciążenia</label>
-        <?php if($rating_on[0] == 'on') : ?>
-            <p style='margin-bottom: 7px;'>Podaj link to wyniku analizy:</p>
+
+        <div class='declaration-meta-form__analyze' id='js-analyze-link' <?= $rating_on[0] == 'on' ? 'style="display: block;"' : false; ?>>
+            <p style='margin-bottom: 7px; margin-top:0;'>Podaj link to wyniku analizy:</p>
             <input type="text" id="rating" name="rating" class="declaration-meta-form__input" value="<?= $rating[0]; ?>">
-        <?php endif; ?>
+        </div>
     </div>
 
     <div class="declaration-meta-form__row">
@@ -123,7 +124,6 @@
 
 (function($) {
     $(document).ready(function() {
-
         const $statusInputs = $('input[name="status"]');
         const $form = $('form[name="post"]');
 
@@ -158,6 +158,37 @@
                     },
                 });
             });
+        });
+
+        $('input[name="rating_on"]').on('click', function() {
+            if($(this).prop("checked") == true) {
+                $('#js-analyze-link').fadeIn();
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: ajaxurl,
+                    data: {
+                        action: "checkbox_change",
+                        checked: 'on',
+                        postID: <?= get_the_ID() ?>
+                    },
+                });
+            }
+            else if($(this).prop("checked") == false){
+                $('#js-analyze-link').fadeOut();
+
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: ajaxurl,
+                    data: {
+                        action: "checkbox_change",
+                        checked: ' ',
+                        postID: <?= get_the_ID() ?>
+                    },
+                });
+            }
         });
     });
 })(jQuery);
