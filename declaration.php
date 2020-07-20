@@ -8,7 +8,7 @@ Plugin Name: Declaration
 Description: Wtyczka tworzy stronę z deklaracją dostępności.
 Author: Przemysław Drożniak & Ernest Fichtner
 Text Domain: declaration
-Version: 1.1.0
+Version: 1.1.1
 */
 
 defined( 'ABSPATH' ) or die('Sorry, you cant access to this site!');
@@ -132,9 +132,11 @@ if(! class_exists('Declaration')) {
         }
         // Add meta content with link
         function add_meta_link() {
-            global $post;
+            if(get_page_by_title( 'Deklaracja dostępności' )) {
+                $declaration_page_id = get_option('declaration_page_id');
+            }
 
-            $page_link = $post->guid;
+            $page_link = get_the_permalink( $declaration_page_id );
 
             echo '<meta name="deklaracja-dostępności" content="'. $page_link .'"/>';
         }
