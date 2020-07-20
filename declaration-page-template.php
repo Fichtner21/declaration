@@ -76,23 +76,23 @@ get_header();
         <?php elseif($status[0] == 'czesciowo-zgodna') : ?>
             <div id="a11y-status" class='add-margin'>Strona internetowa jest częściowo zgodna z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych z powodu niezgodności lub wyłączeń wymienionych poniżej:
                 <div class='add-margin'>
-                    <?= $status_field_1[0]; ?>
+                    <?= wpautop(stripslashes($status_field_1[0])); ?>
                 </div>
 
                 <div class='add-margin'>
                     Wyłączenia:
-                    <?= $status_field_2[0]; ?>
+                    <?= wpautop(stripslashes($status_field_2[0])); ?>
                 </div>
             </div>
         <?php else : ?>
             <div id="a11y-status" class='add-margin'>Strona internetowa jest częściowo zgodna z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych z powodu niezgodności lub wyłączeń wymienionych poniżej:
                 <div class='add-margin'>
-                    <?= $status_field_3[0]; ?>
+                    <?= wpautop(stripslashes($status_field_3[0])); ?>
                 </div>
 
                 <div class='add-margin'>
                     Wyłączenia:
-                    <?= $status_field_4[0]; ?>
+                    <?= wpautop(stripslashes($status_field_4[0])); ?>
                 </div>
             </div>
         <?php endif; ?>

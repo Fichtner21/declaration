@@ -8,7 +8,7 @@ Plugin Name: Declaration
 Description: Wtyczka tworzy stronę z deklaracją dostępności.
 Author: Przemysław Drożniak & Ernest Fichtner
 Text Domain: declaration
-Version: 1.1.1
+Version: 1.1.2
 */
 
 defined( 'ABSPATH' ) or die('Sorry, you cant access to this site!');
@@ -198,16 +198,16 @@ if(! class_exists('Declaration')) {
                         update_post_meta($post->ID, "update-date", strip_tags( $_POST["update-date"] ));
                     }
                     if(isset($_POST['status_field_1'])) {
-                        update_post_meta($post->ID, "status_field_1", strip_tags( $_POST["status_field_1"] ));
+                        update_post_meta($post->ID, "status_field_1", $_POST["status_field_1"]);
                     }
                     if(isset($_POST['status_field_2'])) {
-                        update_post_meta($post->ID, "status_field_2", strip_tags( $_POST["status_field_2"] ));
+                        update_post_meta($post->ID, "status_field_2", $_POST["status_field_2"]);
                     }
                     if(isset($_POST['status_field_3'])) {
-                        update_post_meta($post->ID, "status_field_3", strip_tags( $_POST["status_field_3"] ));
+                        update_post_meta($post->ID, "status_field_3", $_POST["status_field_3"]);
                     }
                     if(isset($_POST['status_field_4'])) {
-                        update_post_meta($post->ID, "status_field_4", strip_tags( $_POST["status_field_4"] ));
+                        update_post_meta($post->ID, "status_field_4", $_POST["status_field_4"]);
                     }
                     if(isset($_POST['status'])) {
                         update_post_meta($post->ID, "status", strip_tags( $_POST["status"] ));

@@ -1,3 +1,13 @@
+<?php
+
+$editor_settings = array(
+    'wpautop' => true,
+    'editor_height' => 100,
+    'quicktags' => false
+);
+
+?>
+
 <div class="declaration-meta-form">
     <div class="declaration-meta-form__row">
         <label for="fullname" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-admin-users"></span> Imię i nazwisko osoby odpowiedzialnej za kontakt w sprawie niedostępności</h3></label>
@@ -25,12 +35,12 @@
 
             <div class="declaration-meta-form__row">
                 <label for="status_field_1" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-visibility"></span> Wymagania niespełnione</h3></label>
-                <?= wp_editor($status_field_1[0], "status_field_1", array('editor_height' => 100, 'quicktags' => false)); ?>
+                <?= wp_editor($status_field_1[0], "status_field_1", $editor_settings); ?>
             </div>
 
             <div class="declaration-meta-form__row">
                 <label for="status_field_2" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-visibility"></span> Wyłączenia</h3></label>
-                <?= wp_editor($status_field_2[0], "status_field_2", array('editor_height' => 100, 'quicktags' => false)); ?>
+                <?= wp_editor($status_field_2[0], "status_field_2", $editor_settings); ?>
             </div>
         </div>
 
@@ -39,12 +49,12 @@
 
             <div class="declaration-meta-form__row">
                 <label for="status_field_3" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-visibility"></span> Wymagania niespełnione</h3></label>
-                <?= wp_editor($status_field_3[0], "status_field_3", array('editor_height' => 100, 'quicktags' => false)); ?>
+                <?= wp_editor($status_field_3[0], "status_field_3", $editor_settings); ?>
             </div>
 
             <div class="declaration-meta-form__row">
                 <label for="status_field_4" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-visibility"></span> Wyłączenia</h3></label>
-                <?= wp_editor($status_field_4[0], "status_field_4", array('editor_height' => 100, 'quicktags' => false)); ?>
+                <?= wp_editor($status_field_4[0], "status_field_4", $editor_settings); ?>
             </div>
         </div>
     </div>
