@@ -8,7 +8,7 @@ Plugin Name: Declaration
 Description: Wtyczka tworzy stronę z deklaracją dostępności.
 Author: Przemysław Drożniak & Ernest Fichtner
 Text Domain: declaration
-Version: 1.1.2
+Version: 1.2.0
 */
 
 defined( 'ABSPATH' ) or die('Sorry, you cant access to this site!');
@@ -80,13 +80,40 @@ if(! class_exists('Declaration')) {
             add_action( 'save_post', array( $this, 'save_details' ), 100 );
         }
 
+        function compareFiles($file_a, $file_b) {
+            if (filesize($file_a) == filesize($file_b) && md5_file($file_a) == md5_file($file_b)) {
+                $fp_a = fopen($file_a, 'rb');
+                $fp_b = fopen($file_b, 'rb');
+
+                while ((!feof($fp_a) && ($b = fread($fp_a, 4096)) !== false)) {
+                    $b_b = fread($fp_b, 4096);
+                    if ($b !== $b_b)
+                    {
+                        fclose($fp_a);
+                        fclose($fp_b);
+                        return false;
+                    }
+                }
+
+                fclose($fp_a);
+                fclose($fp_b);
+
+                return true;
+            }
+
+            return false;
+        }
+
         function theme_files() {
             // Template with form to add post
             $filename = ABSPATH . 'wp-content/themes/' . get_option('stylesheet') . '/declaration.php';
             $content = __DIR__ . DIRECTORY_SEPARATOR . 'declaration-page-template.php';
             // Get content from declaration-content & create file in active theme folder
-            $declaration_template = file_get_contents($content);
-            file_put_contents($filename, $declaration_template);
+            if(!$this->compareFiles($filename, $content)) {
+                $declaration_template = file_get_contents($content);
+
+                file_put_contents($filename, $declaration_template);
+            }
         }
 
         // Hide editor
