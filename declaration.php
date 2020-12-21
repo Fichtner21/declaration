@@ -36,7 +36,7 @@ if(! class_exists('Declaration')) {
             );
 
             //Optional: If you're using a private repository, specify the access token like this:
-            $myUpdateChecker->setAuthentication('2c9375641f1b85448fd18e4500de6210019a3157');
+            $myUpdateChecker->setAuthentication('1f1835c3a13e37f7a248ac14cefcaba616db876e');
 
             //Optional: Set the branch that contains the stable release.
             $myUpdateChecker->setBranch('master');
