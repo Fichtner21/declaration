@@ -72,7 +72,7 @@ get_header();
         <p class='add-margin'>Data publikacji strony internetowej: <span id="a11y-data-publikacja"><?= $date_exist = ($publish_date[0] == true) ? $publish_date[0] : get_the_date('Y-m-d', $posts_array_oldest[0]); ?></span>. Data ostatniej istotnej aktualizacji: <span id="a11y-data-aktualizacja"><?php echo $update_date[0]; ?></span>.</p>
 
         <?php if($status[0] == 'zgodna' || $status[0] == ' ') : ?>
-            <div id="a11y-status" class='add-margin'>Strona internetowa jest zgodna z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych z powodu niezgodności lub wyłączeń wymienionych poniżej:</div>
+            <div id="a11y-status" class='add-margin'>Strona internetowa jest zgodna z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych.</div>
         <?php elseif($status[0] == 'czesciowo-zgodna') : ?>
             <div id="a11y-status" class='add-margin'>Strona internetowa jest częściowo zgodna z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych z powodu niezgodności lub wyłączeń wymienionych poniżej:
                 <div class='add-margin'>
