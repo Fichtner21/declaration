@@ -8,7 +8,7 @@ Plugin Name: Declaration
 Description: Wtyczka tworzy stronę z deklaracją dostępności.
 Author: Przemysław Drożniak & Ernest Fichtner
 Text Domain: declaration
-Version: 1.2.6
+Version: 1.2.7
 */
 
 defined( 'ABSPATH' ) or die('Sorry, you cant access to this site!');
@@ -36,13 +36,13 @@ if(! class_exists('Declaration')) {
             );
 
             //Optional: If you're using a private repository, specify the access token like this:
-            // $myUpdateChecker->setAuthentication('1f1835c3a13e37f7a248ac14cefcaba616db876e');
+            $myUpdateChecker->setAuthentication('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');
 
             //Optional: Set the branch that contains the stable release.
             $myUpdateChecker->setBranch('master');
 
             //Enable realese assets
-            $myUpdateChecker->getVcsApi()->enableReleaseAssets();
+            $myUpdateChecker->getVcsApi()->enableReleaseAssets();            
         }
 
         function activate() {
