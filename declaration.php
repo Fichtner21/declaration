@@ -135,8 +135,6 @@ if(! class_exists('Declaration')) {
                 remove_meta_box( 'postcustom' , 'page' , 'normal' );
                 remove_meta_box( 'slugdiv' , 'page' , 'normal' );
             }
-
-
         }
         // Add Metaboxes
         function add_custom_fields_boxes() {
@@ -180,6 +178,9 @@ if(! class_exists('Declaration')) {
             $phone_number = isset($custom["phone-number"][0]) ? $custom["phone-number"] : " ";
             $update_date = isset($custom["update-date"][0]) ? $custom["update-date"] : " ";
             $status = isset($custom["status"][0]) ? $custom["status"] : " ";
+            $status2 = isset($custom["status2"][0]) ? $custom["status2"] : " ";
+
+            $status_field_0 = isset($custom["status_field_0"][0]) ? $custom["status_field_0"] : " ";
 
             $status_field_1 = isset($custom["status_field_1"][0]) ? $custom["status_field_1"] : " ";
             $status_field_2 = isset($custom["status_field_2"][0]) ? $custom["status_field_2"] : " ";
@@ -195,6 +196,7 @@ if(! class_exists('Declaration')) {
             $accessibility_4 = isset($custom["accessibility-4"][0]) ? $custom["accessibility-4"] : " ";
             $accessibility_5 = isset($custom["accessibility-5"][0]) ? $custom["accessibility-5"] : " ";
             $accessibility_6 = isset($custom["accessibility-6"][0]) ? $custom["accessibility-6"] : " ";
+            $accessibility_7 = isset($custom["accessibility-7"][0]) ? $custom["accessibility-7"] : " ";
 
             $mobile_app_android = isset($custom["mobile-app-android"][0]) ? $custom["mobile-app-android"] : " ";
             $mobile_app_ios = isset($custom["mobile-app-ios"][0]) ? $custom["mobile-app-ios"] : " ";
@@ -223,7 +225,11 @@ if(! class_exists('Declaration')) {
                     }
                     if(isset($_POST['update-date'])) {
                         update_post_meta($post->ID, "update-date", strip_tags( $_POST["update-date"] ));
-                    }
+                    }   
+                    if(isset($_POST['status_field_0'])) {
+                        update_post_meta($post->ID, "status_field_0", $_POST["status_field_0"]);
+                    }                
+
                     if(isset($_POST['status_field_1'])) {
                         update_post_meta($post->ID, "status_field_1", $_POST["status_field_1"]);
                     }
@@ -238,6 +244,9 @@ if(! class_exists('Declaration')) {
                     }
                     if(isset($_POST['status'])) {
                         update_post_meta($post->ID, "status", strip_tags( $_POST["status"] ));
+                    }
+                    if(isset($_POST['status2'])) {
+                        update_post_meta($post->ID, "status2", strip_tags( $_POST["status2"] ));
                     }
                     if(isset($_POST['rating_on']) && $_POST['rating_on'] == 'on' ) {
                         update_post_meta($post->ID, "rating_on", strip_tags( $_POST["rating_on"] ));
@@ -273,6 +282,9 @@ if(! class_exists('Declaration')) {
                     }
                     if(isset($_POST['accessibility-6'])) {
                         update_post_meta($post->ID, "accessibility-6", $_POST["accessibility-6"] );
+                    }
+                    if(isset($_POST['accessibility-7'])) {
+                        update_post_meta($post->ID, "accessibility-7", $_POST["accessibility-7"] );
                     }
                     if(isset($_POST['mobile-app-android'])) {
                         update_post_meta($post->ID, "mobile-app-android", $_POST["mobile-app-android"] );

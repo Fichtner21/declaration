@@ -21,9 +21,11 @@ get_header();
     $phone_number = isset($custom["phone-number"][0]) ? $custom["phone-number"] : " ";
     $update_date = isset($custom["update-date"][0]) ? $custom["update-date"] : " ";
     $status = isset($custom["status"][0]) ? $custom["status"] : " ";
+    $status2 = isset($custom["status2"][0]) ? $custom["status2"] : " ";
     $rating_on = isset($custom["rating_on"][0]) ? $custom["rating_on"] : " ";
     $rating = isset($custom["rating"][0]) ? $custom["rating"] : " ";
 
+    $status_field_0 = isset($custom["status_field_0"][0]) ? $custom["status_field_0"] : " ";
     $status_field_1 = isset($custom["status_field_1"][0]) ? $custom["status_field_1"] : " ";
     $status_field_2 = isset($custom["status_field_2"][0]) ? $custom["status_field_2"] : " ";
     $status_field_3 = isset($custom["status_field_3"][0]) ? $custom["status_field_3"] : " ";
@@ -35,6 +37,7 @@ get_header();
     $accessibility_4 = isset($custom["accessibility-4"][0]) ? $custom["accessibility-4"] : " ";
     $accessibility_5 = isset($custom["accessibility-5"][0]) ? $custom["accessibility-5"] : " ";
     $accessibility_6 = isset($custom["accessibility-6"][0]) ? $custom["accessibility-6"] : " ";
+    $accessibility_7 = isset($custom["accessibility-7"][0]) ? $custom["accessibility-7"] : " ";
 
     $mobile_app_android = isset($custom["mobile-app-android"][0]) ? $custom["mobile-app-android"] : " ";
     $mobile_app_ios = isset($custom["mobile-app-ios"][0]) ? $custom["mobile-app-ios"] : " ";
@@ -104,8 +107,19 @@ get_header();
         <?php endif; ?>
 
         <div class='add-margin'><?= $attention_optional[0]; ?></div>
-        <p class='add-margin'>Oświadczenie sporządzono dnia: <span id="a11y-data-sporzadzenie"><?= $page_date[0]; ?></span>. Deklarację sporządzono na podstawie samooceny przeprowadzonej przez podmiot publiczny.</p>
+        <p class='add-margin'>Oświadczenie sporządzono dnia: <span id="a11y-data-sporzadzenie"><?= $page_date[0]; ?></span>.</p>
 
+        <?php if($status2[0] == 'zgodna2' || $status2[0] == ' ') : ?>
+            <div class='add-margin'>Deklarację sporządzono na podstawie samooceny przeprowadzonej przez podmiot publiczny</div>
+        <?php elseif($status2[0] == 'czesciowo-zgodna2') : ?>
+            <div class='add-margin'>Deklarację sporządzono na podstawie badania przeprowadzonego przez podmiot zewnętrzny:
+                <div class='add-margin'>
+                    <?= wpautop(stripslashes($status_field_0[0])); ?>
+                </div>                
+            </div>
+        <?php else : ?>
+        <?php endif; ?>
+        
         <p>Na stronie internetowej można używać standardowych skrótów klawiaturowych przeglądarki.</p>
 
         <h3 id="a11y-kontakt" class='add-margin'>Informacje zwrotne i dane kontaktowe</h3>
@@ -122,6 +136,14 @@ get_header();
             <li><?= $accessibility_5[0]; ?></li>
             <li><?= $accessibility_6[0]; ?></li>
         </ol>
+        <?php
+        
+        if($accessibility_7[0]){ ?>
+            <h3 class="add-margin">Uwagi:</h3>
+            <div><?php $accessibility_7[0]; ?></div><?php
+        } else {
+            echo '';
+        } ?>        
 
         <h3 id="a11y-aplikacje" class='add-margin'>Aplikacje mobilne</h3>
         <div class="mobile-app add-margin"><?= $mobile_app_android[0]; ?></div>
