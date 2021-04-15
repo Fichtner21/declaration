@@ -8,7 +8,7 @@ Plugin Name: Declaration
 Description: Wtyczka tworzy stronę z deklaracją dostępności.
 Author: Przemysław Drożniak & Ernest Fichtner
 Text Domain: declaration
-Version: 1.2.7
+Version: 1.3.0
 */
 
 defined( 'ABSPATH' ) or die('Sorry, you cant access to this site!');
