@@ -139,9 +139,9 @@ get_header();
         </ol>
         <?php
 
-        if($accessibility_7[0]){ ?>
-            <h2 class="add-margin">Uwagi:</h2>
-            <div><?php $accessibility_7[0]; ?></div><?php
+        if(!empty($accessibility_7[0])) { ?>
+            <h2 class="add-margin">Dostępnść architektoniczna uwagi::</h2>
+            <div><?= $accessibility_7[0]; ?></div><?php
         } else {
             echo '';
         } ?>
