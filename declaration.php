@@ -8,7 +8,7 @@ Plugin Name: Declaration
 Description: Wtyczka tworzy stronę z deklaracją dostępności.
 Author: Przemysław Drożniak & Ernest Fichtner
 Text Domain: declaration
-Version: 1.3.0
+Version: 1.3.1
 */
 
 defined( 'ABSPATH' ) or die('Sorry, you cant access to this site!');
@@ -42,7 +42,7 @@ if(! class_exists('Declaration')) {
             $myUpdateChecker->setBranch('master');
 
             //Enable realese assets
-            $myUpdateChecker->getVcsApi()->enableReleaseAssets();            
+            $myUpdateChecker->getVcsApi()->enableReleaseAssets();
         }
 
         function activate() {
@@ -170,6 +170,7 @@ if(! class_exists('Declaration')) {
 
             $custom = get_post_custom($post->ID);
 
+            $podmiot = isset($custom["podmiot"][0]) ? $custom["podmiot"] : " ";
             $fullname = isset($custom["fullname"][0]) ? $custom["fullname"] : " ";
             $publish_date = isset($custom["publish-date"][0]) ? $custom["publish-date"] : " ";
             $address_email = isset($custom["address-email"][0]) ? $custom["address-email"] : " ";
@@ -214,6 +215,9 @@ if(! class_exists('Declaration')) {
                     if(isset($_POST['dec_test'])){
                         update_post_meta($post->ID, "dec_test", $_POST["dec_test"]);
                     }
+                    if(isset($_POST['podmiot'])) {
+                      update_post_meta($post->ID, "podmiot", strip_tags( $_POST["podmiot"] ));
+                  }
                     if(isset($_POST['fullname'])) {
                         update_post_meta($post->ID, "fullname", strip_tags( $_POST["fullname"] ));
                     }
@@ -225,10 +229,10 @@ if(! class_exists('Declaration')) {
                     }
                     if(isset($_POST['update-date'])) {
                         update_post_meta($post->ID, "update-date", strip_tags( $_POST["update-date"] ));
-                    }   
+                    }
                     if(isset($_POST['status_field_0'])) {
                         update_post_meta($post->ID, "status_field_0", $_POST["status_field_0"]);
-                    }                
+                    }
 
                     if(isset($_POST['status_field_1'])) {
                         update_post_meta($post->ID, "status_field_1", $_POST["status_field_1"]);

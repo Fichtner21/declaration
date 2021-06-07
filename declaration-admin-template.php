@@ -10,6 +10,11 @@ $editor_settings = array(
 
 <div class="declaration-meta-form">
     <div class="declaration-meta-form__row">
+        <label for="podmiot" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-admin-users"></span> Podmiot</h3></label>
+        <input type="text" id="podmiot" name="podmiot" class="declaration-meta-form__input" value="<?= $podmiot[0]; ?>">
+    </div>
+
+    <div class="declaration-meta-form__row">
         <label for="fullname" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-admin-users"></span> Imię i nazwisko osoby odpowiedzialnej za kontakt w sprawie niedostępności</h3></label>
         <input type="text" id="fullname" name="fullname" class="declaration-meta-form__input" value="<?= $fullname[0]; ?>">
     </div>
@@ -80,11 +85,11 @@ $editor_settings = array(
     </div>
 
     <div class="declaration-meta-form__row">
-        <h3><span class="dashicons dashicons-info-outline"></span> Podstawa sporządzenie deklaracji:</h3>        
-        
+        <h3><span class="dashicons dashicons-info-outline"></span> Podstawa sporządzenie deklaracji:</h3>
+
         <label for='status-zgodna2'><input type="radio" name="status2" id="status-zgodna2" value='zgodna2' <?= $status2[0] == 'zgodna2' || $status2[0] == ' ' ? 'checked' : false; ?>>samoocena</label>
 
-        <label for='status-czesciowo-zgodna2'><input type="radio" name="status2" value='czesciowo-zgodna2' id="status-czesciowo-zgodna2" <?= $status2[0] == 'czesciowo-zgodna2' ? 'checked' : false; ?>>zewnetrzny</label>       
+        <label for='status-czesciowo-zgodna2'><input type="radio" name="status2" value='czesciowo-zgodna2' id="status-czesciowo-zgodna2" <?= $status2[0] == 'czesciowo-zgodna2' ? 'checked' : false; ?>>zewnetrzny</label>
 
         <div class='declaration-meta-form__status' id='js-status-wrapper-czesciowo-zgodna2' <?= $status2[0] == 'czesciowo-zgodna2' ? 'style="display: block;"' : false; ?>>
             <h3>Pola dla wartości "Podmiot zewnętrzny"</h3>
@@ -93,7 +98,7 @@ $editor_settings = array(
                 <label for="status_field_1" class="declaration-meta-form__label"><h3><span class="dashicons dashicons-visibility"></span> Podmiot Zewnętrzny audytujący</h3></label>
                 <?= wp_editor($status_field_0[0], "status_field_0", $editor_settings); ?>
             </div>
-        </div>       
+        </div>
     </div>
 
     <div class="declaration-meta-form__row">
@@ -192,7 +197,7 @@ $editor_settings = array(
             });
         });
 
-        const $statusInputs2 = $('input[name="status2"]'); 
+        const $statusInputs2 = $('input[name="status2"]');
         $.each($statusInputs2, function (index, input) {
             $(input).on('change', function() {
                 $.ajax({
@@ -207,12 +212,12 @@ $editor_settings = array(
                     success: function (response) {
                         if (response.type === "success") {
                             if( response.status === 'zgodna2' ) {
-                                
+
                                 $('#js-status-wrapper-czesciowo-zgodna2').css('display', 'none');
-                            } else if( response.status === 'czesciowo-zgodna2' ) {                                            
+                            } else if( response.status === 'czesciowo-zgodna2' ) {
                                 $('#js-status-wrapper-czesciowo-zgodna2').css('display', 'block');
                             } else {
-                                $('#js-status-wrapper-czesciowo-zgodna2').css('display', 'none');                                            
+                                $('#js-status-wrapper-czesciowo-zgodna2').css('display', 'none');
                             }
                         } else {
                             //

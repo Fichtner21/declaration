@@ -13,6 +13,7 @@ get_header();
 
     $custom = get_post_custom($post->ID);
 
+    $podmiot = isset($custom["podmiot"][0]) ? $custom["podmiot"] : " ";
     $fullname = isset($custom["fullname"][0]) ? $custom["fullname"] : " ";
     $address_email = isset($custom["address-email"][0]) ? $custom["address-email"] : " ";
     $publish_date = isset($custom["publish-date"][0]) ? $custom["publish-date"] : " ";
@@ -69,10 +70,10 @@ get_header();
         $posts_array_newest = get_posts($args_new);
         ?>
 
-        <h2 id=”a11y-deklaracja” class='add-margin'><?php the_title(); ?></h2>
-        <div id="a11y-wstep" class='add-margin'><span id="a11y-podmiot"><?php echo get_bloginfo('name'); ?></span> zobowiązuje się zapewnić dostępność swojej strony internetowej zgodnie z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych. Oświadczenie w sprawie dostępności ma zastosowanie do <a href="<?php echo get_home_url(); ?>" id="a11y-url">strony internetowej <?php echo get_bloginfo('name'); ?></a>.</div>
+        <h1 id=”a11y-deklaracja” class='add-margin'><?php the_title(); ?></h1>
+        <div id="a11y-wstep" class='add-margin'><span id="a11y-podmiot"><?= $podmiot[0]; ?></span> zobowiązuje się zapewnić dostępność swojej strony internetowej zgodnie z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych. Oświadczenie w sprawie dostępności ma zastosowanie do <a href="<?= get_home_url(); ?>" id="a11y-url">strony internetowej <?= $podmiot[0]; ?></a>.</div>
 
-        <p class='add-margin'>Data publikacji strony internetowej: <span id="a11y-data-publikacja"><?= $date_exist = ($publish_date[0] == true) ? $publish_date[0] : get_the_date('Y-m-d', $posts_array_oldest[0]); ?></span>. Data ostatniej istotnej aktualizacji: <span id="a11y-data-aktualizacja"><?php echo $update_date[0]; ?></span>.</p>
+        <p class='add-margin'>Data publikacji strony internetowej: <span id="a11y-data-publikacja"><?= $date_exist = ($publish_date[0] == true) ? $publish_date[0] : get_the_date('Y-m-d', $posts_array_oldest[0]); ?></span>. Data ostatniej istotnej aktualizacji: <span id="a11y-data-aktualizacja"><?= $update_date[0]; ?></span>.</p>
 
         <?php if($status[0] == 'zgodna' || $status[0] == ' ') : ?>
             <div id="a11y-status" class='add-margin'>Strona internetowa jest zgodna z ustawą z dnia 4 kwietnia 2019 r. o dostępności cyfrowej stron internetowych i aplikacji mobilnych podmiotów publicznych.</div>
@@ -115,19 +116,19 @@ get_header();
             <div class='add-margin'>Deklarację sporządzono na podstawie badania przeprowadzonego przez podmiot zewnętrzny:
                 <div class='add-margin'>
                     <?= wpautop(stripslashes($status_field_0[0])); ?>
-                </div>                
+                </div>
             </div>
         <?php else : ?>
         <?php endif; ?>
-        
+
         <p>Na stronie internetowej można używać standardowych skrótów klawiaturowych przeglądarki.</p>
 
-        <h3 id="a11y-kontakt" class='add-margin'>Informacje zwrotne i dane kontaktowe</h3>
+        <h2 id="a11y-kontakt" class='add-margin'>Informacje zwrotne i dane kontaktowe</h2>
         <p class='add-margin'>W przypadku problemów z dostępnością strony internetowej prosimy o kontakt. Osobą kontaktową jest  <span id="a11y-osoba"><strong><?= $fullname[0]; ?></strong></span>, <span id="a11y-email"><strong><?= $address_email[0]; ?></strong></span>. Kontaktować można się także dzwoniąc na numer telefonu <span id="a11y-telefon"><strong><?= $phone_number[0]; ?></strong></span>. Tą samą drogą można składać wnioski o udostępnienie informacji niedostępnej oraz składać żądania zapewnienia dostępności.</p>
         <p id="a11y-procedura" class='add-margin'> Każdy ma prawo do wystąpienia z żądaniem zapewnienia dostępności cyfrowej strony internetowej, aplikacji mobilnej lub jakiegoś ich elementu. Można także zażądać udostępnienia informacji za pomocą alternatywnego sposobu dostępu, na przykład przez odczytanie niedostępnego cyfrowo dokumentu, opisanie zawartości filmu bez audiodeskrypcji itp. Żądanie powinno zawierać dane osoby zgłaszającej żądanie, wskazanie, o którą stronę internetową lub aplikację mobilną chodzi oraz sposób kontaktu. Jeżeli osoba żądająca zgłasza potrzebę otrzymania informacji za pomocą alternatywnego sposobu dostępu, powinna także określić dogodny dla niej sposób przedstawienia tej informacji. Podmiot publiczny powinien zrealizować żądanie niezwłocznie, nie później niż w ciągu 7 dni od dnia wystąpienia z żądaniem. Jeżeli dotrzymanie tego terminu nie jest możliwe, podmiot publiczny niezwłocznie informuje o tym wnoszącego żądanie, kiedy realizacja żądania będzie możliwa, przy czym termin ten nie może być dłuższy niż 2 miesiące od dnia wystąpienia z żądaniem. Jeżeli zapewnienie dostępności cyfrowej nie jest możliwe, podmiot publiczny może zaproponować alternatywny sposób dostępu do informacji. W przypadku, gdy podmiot publiczny odmówi realizacji żądania zapewnienia dostępności lub alternatywnego sposobu dostępu do informacji, wnoszący żądanie możne złożyć skargę w sprawie zapewniana dostępności cyfrowej strony internetowej, aplikacji mobilnej lub elementu strony internetowej, lub aplikacji mobilnej. Po wyczerpaniu wskazanej wyżej procedury można także złożyć wniosek do Rzecznika Praw Obywatelskich.</p>
         <p>Link do strony internetowej <a href="https://www.rpo.gov.pl/" target="_blank">Rzecznika Praw Obywatelskich</a>.</p>
 
-        <h3 id="a11y-atchitektura" class='add-margin'>Dostępność architektoniczna</h3>
+        <h2 id="a11y-architektura" class='add-margin'>Dostępność architektoniczna</h2>
         <ol class='add-margin'>
             <li><?= $accessibility_1[0]; ?></li>
             <li><?= $accessibility_2[0]; ?></li>
@@ -137,15 +138,15 @@ get_header();
             <li><?= $accessibility_6[0]; ?></li>
         </ol>
         <?php
-        
+
         if($accessibility_7[0]){ ?>
-            <h3 class="add-margin">Uwagi:</h3>
+            <h2 class="add-margin">Uwagi:</h2>
             <div><?php $accessibility_7[0]; ?></div><?php
         } else {
             echo '';
-        } ?>        
+        } ?>
 
-        <h3 id="a11y-aplikacje" class='add-margin'>Aplikacje mobilne</h3>
+        <h2 id="a11y-aplikacje" class='add-margin'>Aplikacje mobilne</h2>
         <div class="mobile-app add-margin"><?= $mobile_app_android[0]; ?></div>
         <div class="mobile-app add-margin"><?= $mobile_app_ios[0]; ?></div>
     </div>
